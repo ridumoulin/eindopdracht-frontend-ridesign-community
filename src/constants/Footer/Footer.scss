@@ -1,0 +1,28 @@
+@import '../../scss/variables/variables.scss';
+
+.outer-container-footer {
+  border: 0.1rem solid red;
+  min-width: 100vw;
+  height: 9rem;
+  background-color: $creme-color;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.inner-container-footer {
+  border: 0.1rem solid blue;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+
+  width: calc(100vw - 3.5rem);
+  height: 6rem;
+}
+
+img {
+  border: 0.1rem solid purple;
+  max-width: 7rem;
+}
