@@ -1,11 +1,11 @@
-import './App.css'
+import './App.scss'
 import { Routes, Route, Navigate } from 'react-router-dom';
 
 function App() {
     const isLoggedIn = false;
   return (
     <>
-      <div>
+      <div className="app-container">
           <Navigation />
           <Routes>
               <Route path="/" element={<Home />}/>
