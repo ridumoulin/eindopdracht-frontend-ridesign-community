@@ -1,7 +1,10 @@
-import React from 'react';
 import './Navigation.scss';
-import logo from '../../assets/nav/logo-small.png'
 import { useForm } from 'react-hook-form';
+import { NavLink } from 'react-router-dom';
+import { ReactComponent as Logo } from '../../assets/nav/logo.svg';
+import { ReactComponent as Heart } from '../../assets/nav/heart-icon.svg';
+import { ReactComponent as ShoppingCart } from '../../assets/nav/shopping-cart-icon.svg';
+import { ReactComponent as Profile } from '../../assets/nav/profile-icon.svg';
 
 function Navigation() {
     const { register, handleSubmit } = useForm();
@@ -9,15 +12,23 @@ function Navigation() {
     const onSubmit = (data) => {
         console.log('Search term:', data.search);
     };
+
+    const handleChange = (event) => {
+        const selectedLanguage = event.target.value;
+        console.log('Selected language:', selectedLanguage);
+    };
+
     return (
         <nav className="outer-container-nav">
             <div className="inner-container-nav">
 
-                <img className="logo-nav" src={logo} alt="Logo RiDesign"/>
+                <Logo className="logo" />
 
                 <div className="nav-content">
                     <div className="icons">
-
+                        <Heart />
+                        <ShoppingCart />
+                        <Profile />
                     </div>
 
                     <div className="nav-content-down">
@@ -30,9 +41,24 @@ function Navigation() {
                         </form>
 
                         <ul>
-                            <li>Producten</li>
-                            <li>Ridesigners</li>
-                            <li>Info</li>
+                            <li>
+                                <NavLink className={({isActive}) => isActive ? "active-menu-link" : "default-menu-link"} to="/OverviewProducts">Producten</NavLink>
+                            </li>
+                            <li>
+                                <NavLink className={({isActive}) => isActive ? "active-menu-link" : "default-menu-link"} to="/Designers">Ridesigners</NavLink>
+                            </li>
+                            <li>
+                                <NavLink className={({isActive}) => isActive ? "active-menu-link" : "default-menu-link"} to="/Info">Info</NavLink>
+                            </li>
+                        </ul>
+
+                        <ul className="language-dropdown">
+                            <li>
+                                <select onChange={handleChange} {...register('language')}>
+                                    <option value="nl">NL</option>
+                                    <option value="en">EN</option>
+                                </select>
+                            </li>
                         </ul>
                     </div>
                 </div>

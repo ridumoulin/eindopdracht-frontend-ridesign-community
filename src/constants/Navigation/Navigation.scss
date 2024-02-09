@@ -22,7 +22,7 @@
   height: 6rem;
 }
 
-img {
+.logo {
   border: 0.1rem solid purple;
   max-width: 7rem;
 }
@@ -45,9 +45,10 @@ img {
   ul {
     list-style-type: none;
     display: flex;
-    gap: 1rem;
+    gap: 3rem;
     margin-left: 3rem;
-    color: black;
+    color: #1a1a1a;
+    text-transform: uppercase;
   }
 }
 
@@ -55,6 +56,45 @@ form {
   input {
     background-color: $pink-color;
     height: 1.5rem;
+    border: none;
+    border-radius: 1.25rem;
+    text-align: left;
+    text-indent: 0.8rem;
   }
 }
+
+.language-dropdown {
+  select {
+    background: none;
+    border: none;
+    color: #1a1a1a;
+  }
+
+  select {
+    option {
+      background-color: $pink-color !important;
+    }
+  }
+
+  .language-dropdown::after {
+    pointer-events: none;
+    content: '\25BC';
+    color: $grey-color;
+  }
+}
+
+.active-menu-link,
+.default-menu-link {
+  color: #1a1a1a;
+  text-decoration: none;
+}
+
+.default-menu-link {
+  border-bottom: none;
+}
+
+.active-menu-link {
+  color: $dark-green-color;
+}
+
 

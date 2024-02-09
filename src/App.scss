@@ -14,4 +14,25 @@
 
 body {
   font-family: $general-font;
+  button {
+    font-family: $general-font;
+  }
+
+  select {
+    font-family: $general-font;
+    font-size: 1.1rem;
+  }
+
+  input[type="text"] {
+    font-family: $general-font;
+  }
+
+  h1 {
+    font-size: 1.875rem;
+  }
+
+  ul {
+    font-size: 1.1rem;
+  }
 }
+
