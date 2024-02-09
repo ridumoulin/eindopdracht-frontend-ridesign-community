@@ -1,10 +1,10 @@
 import './Navigation.scss';
 import { useForm } from 'react-hook-form';
 import { NavLink } from 'react-router-dom';
-import { ReactComponent as Logo } from '../../assets/nav/logo.svg';
-import { ReactComponent as Heart } from '../../assets/nav/heart-icon.svg';
-import { ReactComponent as ShoppingCart } from '../../assets/nav/shopping-cart-icon.svg';
-import { ReactComponent as Profile } from '../../assets/nav/profile-icon.svg';
+import { ReactComponent as Logo } from '../../assets/nav/shopping-cart-icon.svg';
+// import { ReactComponent as Heart } from '../../assets/nav/heart-icon.svg';
+// import { ReactComponent as ShoppingCart } from '../../assets/nav/shopping-cart-icon.svg';
+// import { ReactComponent as Profile } from '../../assets/nav/profile-icon.svg';
 
 function Navigation() {
     const { register, handleSubmit } = useForm();
@@ -22,13 +22,13 @@ function Navigation() {
         <nav className="outer-container-nav">
             <div className="inner-container-nav">
 
-                <Logo className="logo" />
+                <Logo />
 
                 <div className="nav-content">
                     <div className="icons">
-                        <Heart />
-                        <ShoppingCart />
-                        <Profile />
+                        {/*<Heart />*/}
+                        {/*<ShoppingCart />*/}
+                        {/*<Profile />*/}
                     </div>
 
                     <div className="nav-content-down">
