@@ -1,7 +1,7 @@
 @import '../../scss/variables/variables.scss';
 
 .outer-container-nav {
-  border: 0.1rem solid red;
+  //border: 0.1rem solid red;
   min-width: 100vw;
   height: 9rem;
   background-color: $off-white-color;
@@ -12,7 +12,7 @@
 }
 
 .inner-container-nav {
-  border: 0.1rem solid blue;
+  //border: 0.1rem solid blue;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
@@ -20,15 +20,23 @@
 
   width: calc(100vw - 3.5rem);
   height: 6rem;
+  padding-top: 0.1rem;
+}
+
+.logo-wrapper {
+  //border: 0.1rem solid purple;
+  max-width: 8rem;
+  height: auto;
+  padding: 0.1rem;
+  margin-bottom: 0.9rem;
 }
 
 .logo {
-  border: 0.1rem solid purple;
-  max-width: 7rem;
+  width: 100%;
 }
 
 .nav-content {
-  border: 0.1rem solid green;
+  //border: 0.1rem solid green;
   flex-basis: 60rem;
   height: 100%;
   display: flex;
@@ -36,11 +44,26 @@
   justify-content: space-between;
 }
 
-.nav-content-down {
-  border: 0.1rem solid red;
+.icons {
+  //border: 0.1rem solid #646cff;
+  gap: 0.8rem;
   display: flex;
   flex-direction: row;
   justify-content: flex-end;
+}
+
+.nav-icon {
+  max-width: 2rem;
+  max-height: 2rem;
+  padding: 0.3rem;
+}
+
+.nav-content-down {
+  //border: 0.1rem solid red;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  align-items: center;
 
   ul {
     list-style-type: none;
@@ -52,15 +75,30 @@
   }
 }
 
-form {
-  input {
-    background-color: $pink-color;
-    height: 1.5rem;
-    border: none;
-    border-radius: 1.25rem;
-    text-align: left;
-    text-indent: 0.8rem;
+.search-container {
+  position: relative;
+}
+
+.search-input {
+  background-color: $pink-color;
+  height: 1.5rem;
+  border: none;
+  border-radius: 1.25rem;
+  padding-right: 1.5rem;
+  text-align: left;
+  text-indent: 0.8rem;
+
+  &::placeholder {
+    color: $grey-color;
   }
+}
+
+.search-icon {
+  position: absolute;
+  top: 50%;
+  right: 0.1rem;
+  transform: translateY(-50%);
+  max-height: 1rem;
 }
 
 .language-dropdown {
@@ -87,6 +125,10 @@ form {
 .default-menu-link {
   color: #1a1a1a;
   text-decoration: none;
+
+  &:hover {
+    color: $pink-color;
+  }
 }
 
 .default-menu-link {

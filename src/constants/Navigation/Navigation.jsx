@@ -1,10 +1,12 @@
 import './Navigation.scss';
 import { useForm } from 'react-hook-form';
 import { NavLink } from 'react-router-dom';
-import { ReactComponent as Logo } from '../../assets/nav/shopping-cart-icon.svg';
-// import { ReactComponent as Heart } from '../../assets/nav/heart-icon.svg';
-// import { ReactComponent as ShoppingCart } from '../../assets/nav/shopping-cart-icon.svg';
-// import { ReactComponent as Profile } from '../../assets/nav/profile-icon.svg';
+import { Link } from 'react-router-dom';
+import { ReactComponent as Logo } from '../../assets/nav/logo.svg';
+import { ReactComponent as Heart } from '../../assets/nav/heart-icon.svg';
+import { ReactComponent as ShoppingCart } from '../../assets/nav/shopping-cart-icon.svg';
+import { ReactComponent as Profile } from '../../assets/nav/profile-icon.svg';
+import { ReactComponent as Search } from '../../assets/nav/search-icon.svg';
 
 function Navigation() {
     const { register, handleSubmit } = useForm();
@@ -22,22 +24,28 @@ function Navigation() {
         <nav className="outer-container-nav">
             <div className="inner-container-nav">
 
-                <Logo />
+                <Link to="/" className="logo-wrapper">
+                    <Logo className="logo" />
+                </Link>
 
                 <div className="nav-content">
                     <div className="icons">
-                        {/*<Heart />*/}
-                        {/*<ShoppingCart />*/}
-                        {/*<Profile />*/}
+                        <Heart className="nav-icon" />
+                        <ShoppingCart className="nav-icon"/>
+                        <Profile className="nav-icon"/>
                     </div>
 
                     <div className="nav-content-down">
                         <form onSubmit={handleSubmit(onSubmit)} className="search-form">
-                            <input
-                                type="text"
-                                {...register('search')}
-                                placeholder="Zoek product"
-                            />
+                            <div className="search-container">
+                                <input
+                                    type="text"
+                                    {...register('search')}
+                                    placeholder="Zoek product"
+                                    className="search-input"
+                                />
+                                <Search className="search-icon" />
+                            </div>
                         </form>
 
                         <ul>
