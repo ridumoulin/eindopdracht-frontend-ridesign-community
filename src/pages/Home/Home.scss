@@ -1,0 +1,29 @@
+@import '../../scss/variables/variables.scss';
+
+.outer-container-home {
+  border: 0.1rem solid purple;
+  height: calc(100vh - 9rem);
+  width: 100vw;
+  display: flex;
+  flex-direction: column;
+}
+
+.background-wrapper {
+  border: 0.1rem solid red;
+  height: 55%;
+  width: 100%;
+  overflow: hidden;
+
+  img {
+    border: 0.1rem solid blue;
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+  }
+}
+
+.inner-container-home {
+  height: 45%;
+  background-color: $creme-color;
+  width: 100%;
+}
