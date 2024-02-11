@@ -16,7 +16,12 @@ body {
   font-family: $general-font;
   button {
     font-family: $general-font;
-    box-shadow: 0 0.125rem 0.25rem rgba(142, 137, 135, 0.2);
+    border: none;
+    box-shadow: 0 0.125rem 0.25rem rgba(142, 137, 135, 0.8);
+    background-color: $dark-green-color;
+    text-transform: uppercase;
+    text-align: center;
+    outline: none;
   }
 
   select {
@@ -24,16 +29,29 @@ body {
     font-size: 1.1rem;
   }
 
-  input[type="text"] {
-    font-family: $general-font;
+  label {
+    display: flex;
+    flex-direction: column;
+    color: black;
   }
 
-  h1 {
+  input {
+    font-family: $general-font;
+    background: $off-white-color;
+    border: none;
+    border-radius: 0.3125rem;
+    box-shadow: 0 0.125rem 0.25rem rgba(142, 137, 135, 0.8);
+    color: black;
+  }
+
+  h2 {
     font-size: 1.875rem;
+    color: black;
   }
 
   ul {
     font-size: 1.2rem;
   }
 }
+
 

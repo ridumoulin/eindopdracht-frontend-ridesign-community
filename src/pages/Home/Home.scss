@@ -1,7 +1,6 @@
 @import '../../scss/variables/variables.scss';
 
 .outer-container-home {
-  border: 0.1rem solid purple;
   height: calc(100vh - 9rem);
   width: 100vw;
   display: flex;
@@ -9,21 +8,116 @@
 }
 
 .background-wrapper {
-  border: 0.1rem solid red;
+  position: relative;
   height: 55%;
   width: 100%;
   overflow: hidden;
 
+  &::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(255, 255, 255, 0.2);
+    z-index: 1;
+  }
+
   img {
-    border: 0.1rem solid blue;
     height: 100%;
     width: 100%;
     object-fit: cover;
   }
 }
 
+.home-title,
+.second-home-title {
+  position: absolute;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  background-color: transparent;
+  z-index: 2;
+}
+
+.home-title {
+  font-size: 5rem;
+  text-transform: uppercase;
+  color: black;
+
+  top: 45%;
+  left: 50%;
+}
+
+.title-lowercase-letter {
+  text-transform: lowercase;
+  color: $dark-green-color;
+  font-size: 4.7rem;
+}
+
+.second-home-title {
+  font-size: 2.1rem;
+  text-transform: uppercase;
+  color: $off-white-color;
+  font-weight: 400;
+
+  top: 60%;
+  left: 56%;
+}
+
 .inner-container-home {
   height: 45%;
   background-color: $creme-color;
   width: 100%;
+
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  align-items: center;
 }
+
+.section-background {
+  width: 18rem;
+  height: 12rem;
+  background: $light-green-color;
+  border-radius: 0.3125rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  outline: none;
+
+  p {
+    color: black;
+    font-size: 1rem;
+    font-weight: bold;
+  }
+}
+
+.button-home-one {
+  width: 10rem;
+}
+
+.button-home-two {
+  width: 8rem;
+}
+
+.button-home-three {
+  width: 7rem;
+}
+
+.text-products {
+  width: 10rem;
+}
+
+.text-ridesign {
+  text-align: center;
+  width: 8rem;
+}
+
+.text-contact {
+  text-align: end;
+  width: 7rem;
+}
+
+

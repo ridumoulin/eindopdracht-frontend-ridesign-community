@@ -6,7 +6,7 @@ function Footer() {
         <footer className="outer-container-footer">
             <section className="footer-up">
 
-                <GreenDot className="green-dot-icon" />
+                <GreenDot className="green-dot-footer" />
                 <div>
                     <p>Contact</p>
                     <p>info@ridesigncommunity.com</p>
