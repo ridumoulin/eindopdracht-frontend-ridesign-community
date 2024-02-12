@@ -1,7 +1,6 @@
 @import '../../scss/variables/variables.scss';
 
 .outer-container-new-product {
-  border: 0.1rem solid red;
   background-color: white;
   height: calc(100vh - 9rem);
   width: 100vw;
@@ -37,3 +36,56 @@
   width: 23rem;
   height: 2.7rem;
 }
+
+.photo-upload-container {
+  margin-top: 1rem;
+  width: 23rem;
+  height: 11rem;
+  color: black;
+
+  display: flex;
+  flex-direction: column;
+}
+
+.upload-content-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  height: 100%;
+  width: 100%;
+}
+
+.photo-placeholder,
+.wrapper-upload-photo {
+  flex-basis: 7rem;
+  border-radius: 0.3125rem;
+  box-shadow: 0 0.125rem 0.25rem rgba(142, 137, 135, 0.8);
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.photo-placeholder {
+  background-color: $off-white-color;
+}
+
+.wrapper-upload-photo {
+  border: 0.1rem solid red;
+  background: none;
+
+  img {
+    width: 100%;
+  }
+}
+
+.uploaded-photo {
+  background-color: transparent;
+}
+
+.plus-icon {
+  flex-basis: 2rem;
+  width: 2rem;
+}
+
+
