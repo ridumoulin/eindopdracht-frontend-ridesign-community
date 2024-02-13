@@ -105,13 +105,7 @@
   select {
     background: none;
     border: none;
-    color: #1a1a1a;
-  }
-
-  select {
-    option {
-      background-color: $pink-color !important;
-    }
+    color: black;
   }
 
   .language-dropdown::after {
