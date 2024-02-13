@@ -1,0 +1,50 @@
+@import '../../scss/variables/variables.scss';
+
+.checkbox-container {
+  width: 23rem;
+  height: 2.7rem;
+  margin-top: 0.9rem;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.content-checkbox {
+  width: 50%;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 1rem;
+}
+
+.checkbox {
+  appearance: none;
+  width: 0.2rem !important;
+  height: 0.2rem !important;
+  background-color: white;
+  border-radius: 2px;
+  cursor: pointer;
+
+  &:checked {
+    background-color: $dark-green-color;
+  }
+
+  &:hover {
+    border-color: lightgreen;
+  }
+
+  &:checked::before {
+    content: "\2713";
+    font-size: 2rem;
+    color: white;
+    text-align: center;
+    line-height: 0.8rem;
+  }
+}
+
+
+.checkbox-label {
+  margin: 0;
+  padding: 0;
+}

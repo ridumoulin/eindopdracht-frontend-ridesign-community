@@ -97,87 +97,42 @@
   width: 2rem;
 }
 
-.category-dropdown-container {
-  border: 0.1rem solid red;
-  width: 23rem;
-  height: 6rem;
-}
-
-.category-dropdown {
-  width: 100%;
-  height: 2.7rem;
-  padding: 1rem;
-
-  font-family: $general-font;
-  background: $off-white-color;
-  box-shadow: 0 0.125rem 0.25rem rgba(142, 137, 135, 0.8);
-  border-radius: 0.3125rem;
-  border: none;
-  cursor: pointer;
-  outline: none;
-}
-
-.dropdown {
-  position: absolute;
-  display: none;
-  z-index: 1;
-}
-
-.category-dropdown:hover.dropdown {
-  display: block;
-}
-
-.category-dropdown option {
-  padding: 1rem;
-}
-
-.checkbox-container {
-  width: 23rem;
-  height: 2.7rem;
-  margin-top: 0.9rem;
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-}
-
-.content-checkbox {
-  width: 50%;
-  display: flex;
-  flex-direction: row;
-  justify-content: flex-start;
-  align-items: center;
-  gap: 1rem;
-}
-
-.checkbox {
-  appearance: none;
-  width: 0.2rem !important;
-  height: 0.2rem !important;
-  background-color: white;
-  border-radius: 2px;
-  cursor: pointer;
-
-  &:checked {
-    background-color: $dark-green-color;
-  }
-
-  &:hover {
-    border-color: lightgreen;
-  }
-
-  &:checked::before {
-    content: "\2713";
-    font-size: 2rem;
-    color: white;
-    text-align: center;
-    line-height: 0.8rem;
-  }
-}
+//.category-dropdown-container {
+//  border: 0.1rem solid red;
+//  width: 23rem;
+//  height: 6rem;
+//}
+//
+//.category-dropdown {
+//  width: 100%;
+//  height: 2.7rem;
+//  padding: 1rem;
+//
+//  font-family: $general-font;
+//  background: $off-white-color;
+//  box-shadow: 0 0.125rem 0.25rem rgba(142, 137, 135, 0.8);
+//  border-radius: 0.3125rem;
+//  border: none;
+//  cursor: pointer;
+//  outline: none;
+//}
+//
+//.dropdown {
+//  position: absolute;
+//  display: none;
+//  z-index: 1;
+//}
+//
+//.category-dropdown:hover.dropdown {
+//  display: block;
+//}
+//
+//.category-dropdown option {
+//  padding: 1rem;
+//}
 
 
-.checkbox-label {
-  margin: 0;
-  padding: 0;
-}
+
+
 
 
