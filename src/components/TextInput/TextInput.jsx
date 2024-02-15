@@ -1,4 +1,5 @@
 import PropTypes from 'prop-types';
+import './TextInput.scss';
 
 function TextInput(props) {
     return (

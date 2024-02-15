@@ -1,4 +1,5 @@
 import PropTypes from 'prop-types';
+import './Textarea.scss';
 
 function Textarea(props) {
     return (
@@ -7,7 +8,7 @@ function Textarea(props) {
             <textarea
                 id={props.id}
                 {...props.register}
-                className="input-form"
+                className="textarea-input-form"
             />
             {props.errors && <span className="error-message">{props.errors.message}</span>}
         </label>

@@ -5,6 +5,7 @@ import TextInput from "../../components/TextInput/TextInput.jsx";
 import PhotoUpload from "../../components/PhotoUpload/PhotoUpload.jsx";
 import Textarea from "../../components/TextArea/Textarea.jsx";
 import Checkbox from "../../components/Checkbox/Checkbox.jsx";
+import SelectInput from "../../components/SelectInput/SelectInput.jsx";
 
 function NewProduct() {
 
@@ -23,7 +24,12 @@ function NewProduct() {
             <form className="form-new-product">
                 <h2><GreenDot className="green-dot-title"/> Voeg jouw RiDesign toe <GreenDot className="green-dot-title"/></h2>
 
-                <TextInput label="Producttitel/ naam" id="title-field" register={register("title")} errors={errors.title} />
+                <TextInput
+                    label="Producttitel/ naam"
+                    id="title-field"
+                    register={register("title")}
+                    errors={errors.title}
+                />
 
                 <PhotoUpload
                     register={register}
@@ -32,26 +38,21 @@ function NewProduct() {
                     errors={errors}
                 />
 
-
-                <label htmlFor="category-select">
-                    Categorie
-                    <div className="dropdown">
-                        <select
-                            id="category-select"
-                            {...register("categories")}
-                            className="category-dropdown"
-
-                        >
-                            {/*<option value="">--Selecteer categorie--</option>*/}
-                            <option value="beds">Banken</option>
-                            <option value="tables">Bedden</option>
-                            <option value="sofas">Kasten</option>
-                            <option value="chairs">Stoelen & fauteuils</option>
-                            <option value="tables">Tafels</option>
-                            <option value="garden-furniture">Tuinmeubelen</option>
-                        </select>
-                    </div>
-                </label>
+                <SelectInput
+                    id="category-select"
+                    label="Categorie"
+                    register={register("categories")}
+                    placeholder="Selecteer een categorie"
+                    options={[
+                        { value: 'beds', label: 'Banken' },
+                        { value: 'tables', label: 'Bedden' },
+                        { value: 'sofas', label: 'Kasten' },
+                        { value: 'chairs', label: 'Stoelen & fauteuils' },
+                        { value: 'tables', label: 'Tafels' },
+                        { value: 'garden-furniture', label: 'Tuinmeubelen' }
+                    ]}
+                    errors={errors.categories}
+                />
 
                 <TextInput
                     id="dimensions-field"
@@ -74,19 +75,21 @@ function NewProduct() {
                     errors={errors.materials}
                 />
 
-                <Checkbox
-                    id="delivery-checkbox"
-                    label="Bezorgen"
-                    register={register("delivery")}
-                    value="bezorgen"
-                />
+                <div className="checkbox-container">
+                    <Checkbox
+                        id="delivery-checkbox"
+                        label="Bezorgen"
+                        register={register("delivery")}
+                        value="bezorgen"
+                    />
 
-                <Checkbox
-                    id="pickup-checkbox"
-                    label="Ophalen"
-                    register={register("pickup")}
-                    value="ophalen"
-                />
+                    <Checkbox
+                        id="pickup-checkbox"
+                        label="Ophalen"
+                        register={register("pickup")}
+                        value="ophalen"
+                    />
+                </div>
 
                 <button type="submit">
                     RiDesign toevoegen

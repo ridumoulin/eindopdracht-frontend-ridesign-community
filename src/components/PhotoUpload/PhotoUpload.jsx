@@ -1,5 +1,6 @@
 import { ReactComponent as PlusIcon } from '../../assets/general/plus-icon.svg';
 import PropTypes from 'prop-types';
+import './PhotoUpload.scss';
 
 function PhotoUpload(props) {
     const handleFileChange = (index, e) => {
@@ -40,7 +41,6 @@ function PhotoUpload(props) {
                                     type="file"
                                     id={`photo${index}-field`}
                                     {...props.register(`photos.${index}`, { required: true })}
-                                    className="input-form-photo"
                                     style={{ display: "none" }}
                                     accept="image/*"
                                     onChange={(e) => handleFileChange(index, e)}
