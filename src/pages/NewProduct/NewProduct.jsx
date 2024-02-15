@@ -57,8 +57,17 @@ function NewProduct() {
                 <TextInput
                     id="dimensions-field"
                     label="Afmetingen (lxbxh)"
+                    placeholder="Bv. 30cm x 40cm x 50cm"
                     register={register("dimensions")}
                     errors={errors.dimensions}
+                />
+
+                <TextInput
+                    id="materials-field"
+                    label="Materialen"
+                    placeholder="Bv. Hout, staal"
+                    register={register("materials")}
+                    errors={errors.materials}
                 />
 
                 <Textarea
@@ -69,10 +78,11 @@ function NewProduct() {
                 />
 
                 <TextInput
-                    id="materials-field"
-                    label="Materialen"
-                    register={register("materials")}
-                    errors={errors.materials}
+                    id="price-field"
+                    label="Verkoopprijs"
+                    placeholder="€ . . , . ."
+                    register={register("price")}
+                    errors={errors.price}
                 />
 
                 <div className="checkbox-container">

@@ -8,6 +8,7 @@ function TextInput(props) {
             <input
                 type="text"
                 id={props.id}
+                placeholder={props.placeholder}
                 {...props.register}
                 className="input-form"
             />
@@ -20,6 +21,7 @@ TextInput.propTypes = {
     id: PropTypes.string.isRequired,
     label: PropTypes.string.isRequired,
     register: PropTypes.object.isRequired,
+    placeholder: PropTypes.string,
     errors: PropTypes.object
 };
 
