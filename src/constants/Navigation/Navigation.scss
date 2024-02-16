@@ -42,20 +42,22 @@
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  position: relative;
 }
 
 .icons {
   //border: 0.1rem solid #646cff;
-  gap: 0.8rem;
+  flex-basis: 2.5rem;
+  gap: 1.2rem;
   display: flex;
   flex-direction: row;
   justify-content: flex-end;
 }
 
 .nav-icon {
+  //border: 0.1rem solid red;
   max-width: 2rem;
   max-height: 2rem;
-  padding: 0.3rem;
 }
 
 .nav-content-down {
@@ -133,4 +135,83 @@
   color: $dark-green-color;
 }
 
+.product-dropdown {
+  position: absolute;
+  top: 5.9rem;
+  left: 29rem;
+  width: 8rem;
+  height: 10rem;
+  background-color: $off-white-color;
+  box-shadow: 0 0.125rem 0.25rem rgba(142, 137, 135, 0.8);
+  z-index: 10;
+  display: none;
+  padding: 0.5rem;
+  border-radius: 0.3125rem;
+}
+
+.nav-content:hover .product-dropdown {
+  display: block;
+}
+
+.product-dropdown ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  gap: 0.1rem;
+  display: flex;
+  flex-direction: column;
+  font-size: 0.8rem;
+}
+
+.product-dropdown ul li {
+  padding-top: 0.1px;
+}
+
+.product-dropdown ul li a {
+  text-decoration: none;
+  color: black;
+}
+
+.product-dropdown ul li a:hover {
+  color: $dark-green-color;
+}
+
+.profile-dropdown {
+  position: absolute;
+  top: 2.5rem; // Adjust the distance from the top
+  right: 0; // Position it at the right edge
+  width: 6.3rem;
+  height: 4rem;
+  background-color: $off-white-color;
+  box-shadow: 0 0.125rem 0.25rem rgba(142, 137, 135, 0.8);
+  border-radius: 0.3125rem;
+  z-index: 10;
+  display: none;
+  padding: 0.5rem;
+}
+
+.nav-content:hover .profile-dropdown {
+  display: block;
+}
+
+.profile-dropdown ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  font-size: 0.8rem;
+  text-transform: uppercase;
+}
+
+.profile-dropdown ul li {
+  margin-bottom: 0.5rem;
+}
+
+.profile-dropdown ul li a {
+  text-decoration: none;
+  color: black;
+}
+
+.profile-dropdown ul li a:hover {
+  color: $dark-green-color;
+}
 
