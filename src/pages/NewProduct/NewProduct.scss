@@ -1,0 +1,47 @@
+@import '../../scss/variables/variables.scss';
+
+.outer-container-new-product {
+  background-color: white;
+  min-height: calc(100vh - 9rem);
+  width: 100vw;
+  display: flex;
+  justify-content: center;
+}
+
+.form-new-product {
+  background-color: $light-green-color;
+  width: 40rem;
+  min-height: 68rem;
+  border-radius: 0.3125rem;
+  margin: 3.5rem 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  h2 {
+    width: 28rem;
+    text-align: center;
+    margin: 2rem 0;
+  }
+
+  button {
+    width: 23rem;
+  }
+}
+
+.green-dot-title {
+  max-width: 1.1rem;
+}
+
+.checkbox-container {
+  width: 23rem;
+  height: 2.7rem;
+  margin-top: 0.9rem;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+
+
+

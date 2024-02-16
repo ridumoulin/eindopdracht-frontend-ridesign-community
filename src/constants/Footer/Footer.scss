@@ -23,6 +23,7 @@
 
 .footer-up {
   //border: 0.1rem solid pink;
+  border: 0.15rem solid $sand-color;
   background-color: $creme-color;
   justify-content: flex-end;
   padding-right: 2.7rem;
@@ -41,7 +42,7 @@
   font-size: 0.9rem;
 }
 
-.green-dot-icon {
+.green-dot-footer {
   height: 2rem;
   width: 2rem;
 }

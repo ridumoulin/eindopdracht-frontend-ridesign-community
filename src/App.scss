@@ -16,24 +16,38 @@ body {
   font-family: $general-font;
   button {
     font-family: $general-font;
-    box-shadow: 0 0.125rem 0.25rem rgba(142, 137, 135, 0.2);
+    border: none;
+    box-shadow: 0 0.125rem 0.25rem rgba(142, 137, 135, 0.8);
+    background-color: $dark-green-color;
+    text-transform: uppercase;
+    text-align: center;
+    outline: none;
+    margin-top: 1.5rem;
+  }
+
+  label {
+    display: flex;
+    flex-direction: column;
+    color: black;
+    margin-top: 1rem;
   }
 
   select {
     font-family: $general-font;
-    font-size: 1.1rem;
   }
 
-  input[type="text"] {
+  input {
     font-family: $general-font;
   }
 
-  h1 {
+  h2 {
     font-size: 1.875rem;
+    color: black;
   }
 
   ul {
     font-size: 1.2rem;
   }
 }
+
 

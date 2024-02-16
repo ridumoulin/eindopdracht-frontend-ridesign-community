@@ -1,0 +1,50 @@
+@import '../../scss/variables/variables.scss';
+
+.photo-upload-container {
+  margin-top: 1rem;
+  width: 23rem;
+  height: 11rem;
+  color: black;
+  display: flex;
+  flex-direction: column;
+}
+
+.upload-content-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  height: 100%;
+  width: 100%;
+}
+
+.photo-placeholder,
+.wrapper-upload-photo {
+  flex-basis: 7rem;
+  border-radius: 0.3125rem;
+  box-shadow: 0 0.125rem 0.25rem rgba(142, 137, 135, 0.8);
+}
+
+.photo-placeholder {
+  background-color: $off-white-color;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.wrapper-upload-photo {
+  background: none;
+
+  img {
+    width: 100%;
+  }
+}
+
+.uploaded-photo {
+  background-color: transparent;
+}
+
+.plus-icon {
+  flex-basis: 1.7rem;
+  width: 1.7rem;
+  margin-bottom: 0.8rem;
+}
