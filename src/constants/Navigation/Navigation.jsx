@@ -30,23 +30,18 @@ function Navigation() {
 
     const showProductMenu = () => {
         setShowProductDropdown(true);
-        // Hide profile dropdown when showing product dropdown
         setShowProfileDropdown(false);
     };
 
-    // Function to hide the product dropdown when mouse leaves
     const hideProductMenu = () => {
         setShowProductDropdown(false);
     };
 
-    // Function to show the profile dropdown when hovered
     const showProfileMenu = () => {
         setShowProfileDropdown(true);
-        // Hide product dropdown when showing profile dropdown
         setShowProductDropdown(false);
     };
 
-    // Function to hide the profile dropdown when mouse leaves
     const hideProfileMenu = () => {
         setShowProfileDropdown(false);
     };
