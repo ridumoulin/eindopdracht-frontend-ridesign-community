@@ -1,12 +1,12 @@
 import PropTypes from 'prop-types';
-import './TextInput.scss';
+import './PasswordInput.scss';
 
-function TextInput(props) {
+function PasswordInput(props) {
     return (
         <label htmlFor={props.id}>
             {props.label}
             <input
-                type={props.type}
+                type="password"
                 id={props.id}
                 placeholder={props.placeholder}
                 {...props.register}
@@ -17,7 +17,7 @@ function TextInput(props) {
     );
 }
 
-TextInput.propTypes = {
+PasswordInput.propTypes = {
     id: PropTypes.string.isRequired,
     label: PropTypes.string.isRequired,
     register: PropTypes.object.isRequired,
@@ -25,5 +25,4 @@ TextInput.propTypes = {
     errors: PropTypes.object
 };
 
-
-export default TextInput;
+export default PasswordInput;

@@ -25,6 +25,7 @@ function NewProduct() {
                 <h2><GreenDot className="green-dot-title"/> Voeg jouw RiDesign toe <GreenDot className="green-dot-title"/></h2>
 
                 <TextInput
+                    type="text"
                     label="Producttitel/ naam"
                     id="title-field"
                     register={register("title")}
@@ -55,6 +56,7 @@ function NewProduct() {
                 />
 
                 <TextInput
+                    type="text"
                     id="dimensions-field"
                     label="Afmetingen (lxbxh)"
                     placeholder="Bv. 30cm x 40cm x 50cm"
@@ -63,6 +65,7 @@ function NewProduct() {
                 />
 
                 <TextInput
+                    type="text"
                     id="materials-field"
                     label="Materialen"
                     placeholder="Bv. Hout, staal"
