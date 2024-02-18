@@ -36,7 +36,7 @@ function SignIn() {
                     placeholder="Vul hier je wachwoord in"
                     errors={errors.password}
                 />
-                <button type="submit">Submit</button>
+                <button type="submit">Inloggen</button>
             </form>
         </div>
     );

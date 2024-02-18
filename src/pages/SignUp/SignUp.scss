@@ -11,7 +11,7 @@
 .form-sign-up {
   background-color: $light-green-color;
   width: 40rem;
-  min-height: 68rem;
+  height: 47rem;
   border-radius: 0.3125rem;
   margin: 3.5rem 0;
   display: flex;
@@ -19,14 +19,20 @@
   align-items: center;
 
   h2 {
-    width: 28rem;
+    //border: 0.1rem solid red;
+    width: 35rem;
     text-align: center;
     margin: 2rem 0;
   }
 
   button {
     width: 23rem;
+    margin-top: 2.5rem;
   }
 
+}
 
+.checkbox-container-ri-designer {
+  width: 23rem;
+  margin-top: 1rem;
 }
