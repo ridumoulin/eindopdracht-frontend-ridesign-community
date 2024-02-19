@@ -1,0 +1,48 @@
+@import '../../scss/variables/variables.scss';
+
+.outer-container-info {
+  background-color: white;
+  min-height: calc(100vh - 9rem);
+  width: 100vw;
+  display: flex;
+  justify-content: center;
+}
+
+.info-page {
+  background-color: $light-green-color;
+  border-radius: 0.3125rem;
+  width: 60rem;
+  height: 40rem;
+  margin: 3.5rem 0;
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.section-about,
+.section-how-it-works {
+  width: 45rem;
+
+  text-align: center;
+  margin: 1rem 0;
+  height: 20rem;
+
+  h2 {
+    margin-bottom: 1rem;
+  }
+
+  p {
+    color: black;
+  }
+}
+
+.section-about {
+  text-align: left;
+
+}
+
+.section-how-it-works {
+  text-align: right;
+}

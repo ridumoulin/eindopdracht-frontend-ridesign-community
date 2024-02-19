@@ -27,7 +27,7 @@ function NewProduct() {
                     type="text"
                     label="Producttitel/ naam"
                     id="title-field"
-                    register={register("title")}
+                    register={register}
                     errors={errors.title}
                 />
 
@@ -41,7 +41,7 @@ function NewProduct() {
                 <SelectInput
                     id="category-select"
                     label="Categorie"
-                    register={register("categories")}
+                    register={register}
                     placeholder="Selecteer een categorie"
                     options={[
                         { value: 'beds', label: 'Banken' },
@@ -59,7 +59,7 @@ function NewProduct() {
                     id="dimensions-field"
                     label="Afmetingen (lxbxh)"
                     placeholder="Bv. 30cm x 40cm x 50cm"
-                    register={register("dimensions")}
+                    register={register}
                     errors={errors.dimensions}
                 />
 
@@ -68,22 +68,23 @@ function NewProduct() {
                     id="materials-field"
                     label="Materialen"
                     placeholder="Bv. Hout, staal"
-                    register={register("materials")}
+                    register={register}
                     errors={errors.materials}
                 />
 
                 <Textarea
                     id="message-field"
                     label="Geef een omschrijving"
-                    register={register("message")}
+                    register={register}
                     errors={errors.message}
                 />
 
                 <TextInput
+                    type="text"
                     id="price-field"
                     label="Verkoopprijs"
                     placeholder="€ . . , . ."
-                    register={register("price")}
+                    register={register}
                     errors={errors.price}
                 />
 
@@ -91,14 +92,14 @@ function NewProduct() {
                     <Checkbox
                         id="delivery-checkbox"
                         label="Bezorgen"
-                        register={register("delivery")}
+                        register={register}
                         value="bezorgen"
                     />
 
                     <Checkbox
                         id="pickup-checkbox"
                         label="Ophalen"
-                        register={register("pickup")}
+                        register={register}
                         value="ophalen"
                     />
                 </div>

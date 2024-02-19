@@ -26,6 +26,7 @@ function SignIn() {
                     label="E-mail"
                     register={register}
                     placeholder="Vul hier je e-mail in"
+                    validate={(value) => value.includes('@')}
                     errors={errors.email}
                 />
 

@@ -24,6 +24,7 @@ function SignUp() {
                     id="email"
                     label="E-mail"
                     register={register}
+                    validate={(value) => value.includes('@')}
                     errors={errors.email}
                 />
 

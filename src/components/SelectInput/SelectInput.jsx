@@ -2,20 +2,23 @@ import './SelectInput.scss';
 import PropTypes from 'prop-types';
 
 function SelectInput(props) {
+    const { id, label, register, placeholder, options, errors } = props;
+    const selectProps = register(id, { required: true });
+
     return (
-        <label htmlFor={props.id}>
-            {props.label}
+        <label htmlFor={id}>
+            {label}
             <select
-                id={props.id}
-                {...props.register}
+                id={id}
+                {...selectProps}
                 className="category-dropdown"
             >
-                <option value="">{props.placeholder}</option>
-                {props.options.map(option => (
+                <option value="">{placeholder}</option>
+                {options.map(option => (
                     <option key={option.value} value={option.value}>{option.label}</option>
                 ))}
             </select>
-            {props.errors && <span className="error-message">{props.errors.message}</span>}
+            {errors && <span className="error-message">{errors.message}</span>}
         </label>
     );
 }
