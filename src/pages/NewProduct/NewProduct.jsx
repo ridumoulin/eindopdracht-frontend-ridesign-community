@@ -6,10 +6,13 @@ import PhotoUpload from "../../components/PhotoUpload/PhotoUpload.jsx";
 import Textarea from "../../components/TextArea/Textarea.jsx";
 import Checkbox from "../../components/Checkbox/Checkbox.jsx";
 import SelectInput from "../../components/SelectInput/SelectInput.jsx";
+import {useState} from "react";
 
 function NewProduct() {
 
-    const { register, handleSubmit, setValue, formState: { errors, values = { photos: ['', '', ''] } } } = useForm({
+    const [ values, setValue ] = useState([null, null, null])
+
+    const { register, handleSubmit, formState: { errors } } = useForm({
         mode: 'onChange',
         criteriaMode: 'all'
     });

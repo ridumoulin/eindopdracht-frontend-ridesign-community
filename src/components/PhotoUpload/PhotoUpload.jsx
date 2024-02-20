@@ -6,38 +6,22 @@ function PhotoUpload(props) {
     const { values, setValue, register, errors } = props;
 
     const handleFileChange = (index, e) => {
-        const files = e.target.files;
-        console.log("Files selected:", files);
-
-        if (files.length > 0) {
-            const updatedPhotos = [...values.photos];
-
-            for (let i = 0; i < files.length; i++) {
-                const file = files[i];
-                console.log("Selected file:", file);
-
-                updatedPhotos[index + i] = file;
-
-                if (file instanceof File) {
-                    console.log(`Uploaded photo ${index + i + 1}:`, URL.createObjectURL(file));
-                }
-            }
-
-            setValue('photos', updatedPhotos);
-            console.log('Uploaded files:', updatedPhotos);
-        }
+        const newFiles = [...values];
+        newFiles[index] = e.target.files[0];
+        setValue(newFiles);
     };
 
     return (
         <div className="photo-upload-container">
+            {console.log(values)}
             <p>Foto&apos;s uploaden</p>
             <div className="upload-content-container">
                 {[0, 1, 2].map((index) => (
-                    <div key={index} className={`photo-placeholder ${values.photos[index] instanceof File ? 'uploaded-photo' : ''}`}>
-                        {values.photos[index] instanceof File ? (
+                    <div key={index} className={`photo-placeholder ${values[index] instanceof File ? 'uploaded-photo' : ''}`}>
+                        {values[index] instanceof File ? (
                             <div className="wrapper-upload-photo">
                                 <img
-                                    src={URL.createObjectURL(values.photos[index])}
+                                    src={URL.createObjectURL(values[index])}
                                     alt={`Uploaded photo ${index + 1}`}
                                 />
                             </div>

@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import PropTypes from 'prop-types';
 import { ReactComponent as Eye } from '../../assets/general/eye.svg';
-// import { ReactComponent as EyeSlash } from '../../assets/general/eye-slash.svg';
+import { ReactComponent as EyeSlash } from '../../assets/general/eye-slash.svg';
 
 import './PasswordInput.scss';
 
