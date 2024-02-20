@@ -1,6 +1,6 @@
 @import '../../scss/variables/variables.scss';
 
-.outer-container-overview-products {
+.outer-container-ri-designers {
   background-color: white;
   min-height: calc(100vh - 9rem);
   width: 100vw;
@@ -8,11 +8,11 @@
   justify-content: center;
 }
 
-.overview-product-page {
+.content-ri-designers {
   background-color: $light-green-color;
   border-radius: 0.3125rem;
-  width: 60rem;
-  height: 40rem;
+  width: 150rem;
+  height: 80rem;
   margin: 3.5rem 0;
   padding: 2rem;
   display: flex;

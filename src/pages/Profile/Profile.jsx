@@ -1,5 +1,5 @@
 import './Profile.scss';
-import { ReactComponent as GreenDot } from '../../assets/general/green-dot-icon.svg';
+// import { ReactComponent as GreenDot } from '../../assets/general/green-dot-icon.svg';
 
 function Profile() {
     return(
@@ -15,3 +15,5 @@ function Profile() {
         </div>
     )
 }
+
+export default Profile;

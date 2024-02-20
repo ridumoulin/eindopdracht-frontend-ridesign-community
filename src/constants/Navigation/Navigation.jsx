@@ -46,7 +46,6 @@ function Navigation() {
         setShowProfileDropdown(false);
     };
 
-
     return (
         <nav className="outer-container-nav">
             <div className="inner-container-nav">
@@ -96,8 +95,8 @@ function Navigation() {
                                 <NavLink
                                     onMouseEnter={showProductMenu}
                                     onMouseLeave={hideProductMenu}
-                                    className={showProductDropdown ? "active-menu-link" : "default-menu-link"} // Apply the classNames based on the state
-                                    to="/OverviewProducts"
+                                    className={({isActive}) => isActive ? "active-menu-link" : "default-menu-link"}
+                                    to="/products"
                                 >
                                     Producten
                                 </NavLink>
@@ -115,10 +114,10 @@ function Navigation() {
                                 )}
                             </li>
                             <li>
-                                <NavLink className={({isActive}) => isActive ? "active-menu-link" : "default-menu-link"} to="/Designers">Ridesigners</NavLink>
+                                <NavLink className={({isActive}) => isActive ? "active-menu-link" : "default-menu-link"} to="/ri-designers">Ridesigners</NavLink>
                             </li>
                             <li>
-                                <NavLink className={({isActive}) => isActive ? "active-menu-link" : "default-menu-link"} to="/Info">Info</NavLink>
+                                <NavLink className={({isActive}) => isActive ? "active-menu-link" : "default-menu-link"} to="/info">Info</NavLink>
                             </li>
                         </ul>
 

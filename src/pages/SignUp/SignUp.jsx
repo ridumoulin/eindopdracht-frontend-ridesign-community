@@ -20,7 +20,7 @@ function SignUp() {
                 <h2><GreenDot className="green-dot-title"/> Hey! Hier kun jij je aanmelden! <GreenDot className="green-dot-title"/></h2>
 
                 <TextInput
-                    type="type"
+                    type="email"
                     id="email"
                     label="E-mail"
                     register={register}
