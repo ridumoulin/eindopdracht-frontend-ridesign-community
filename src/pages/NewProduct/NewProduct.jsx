@@ -21,6 +21,8 @@ function NewProduct() {
         console.log(data);
     };
 
+
+
     return (
         <div className="outer-container-new-product" onSubmit={handleSubmit(onSubmit)}>
             <form className="form-new-product">
