@@ -1,0 +1,40 @@
+@import '../../scss/variables/variables.scss';
+
+.outer-container-sign-in {
+  background-color: white;
+  min-height: calc(100vh - 9rem);
+  width: 100vw;
+  display: flex;
+  justify-content: center;
+}
+
+.form-sign-in {
+  background-color: $light-green-color;
+  width: 40rem;
+  height: 28rem;
+  border-radius: 0.3125rem;
+  margin: 8rem 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  h2 {
+    width: 28rem;
+    text-align: center;
+    margin-top: 2rem;
+  }
+
+  button {
+    width: 23rem;
+    margin-top: 2.5rem;
+  }
+
+  p {
+    margin: 1rem 0;
+    color: black;
+  }
+}
+
+.link-to-sign-up {
+  color: $dark-green-color;
+}

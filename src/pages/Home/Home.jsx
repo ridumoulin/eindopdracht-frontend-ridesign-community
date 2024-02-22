@@ -21,14 +21,14 @@ function Home() {
 
                 <section className="section-background">
                     <p className="text-ridesign">Ben jij een RiDesigner?</p>
-                    <Link to="/NewProduct">
+                    <Link to="/new-product">
                         <button className="button-home-two">Verkopen</button>
                     </Link>
                 </section>
 
                 <section className="section-background">
                     <p className="text-contact">Aanvraag of inleveren?</p>
-                    <Link to="/Inquiries">
+                    <Link to="/inquiries">
                         <button className="button-home-three">Contact</button>
                     </Link>
                 </section>

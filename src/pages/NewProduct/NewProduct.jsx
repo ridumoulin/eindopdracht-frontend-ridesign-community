@@ -6,10 +6,13 @@ import PhotoUpload from "../../components/PhotoUpload/PhotoUpload.jsx";
 import Textarea from "../../components/TextArea/Textarea.jsx";
 import Checkbox from "../../components/Checkbox/Checkbox.jsx";
 import SelectInput from "../../components/SelectInput/SelectInput.jsx";
+import {useState} from "react";
 
 function NewProduct() {
 
-    const { register, handleSubmit, setValue, formState: { errors, values = { photos: ['', '', ''] } } } = useForm({
+    const [ values, setValue ] = useState([null, null, null])
+
+    const { register, handleSubmit, formState: { errors } } = useForm({
         mode: 'onChange',
         criteriaMode: 'all'
     });
@@ -18,16 +21,16 @@ function NewProduct() {
         console.log(data);
     };
 
-
     return (
         <div className="outer-container-new-product" onSubmit={handleSubmit(onSubmit)}>
             <form className="form-new-product">
                 <h2><GreenDot className="green-dot-title"/> Voeg jouw RiDesign toe <GreenDot className="green-dot-title"/></h2>
 
                 <TextInput
+                    type="text"
                     label="Producttitel/ naam"
                     id="title-field"
-                    register={register("title")}
+                    register={register}
                     errors={errors.title}
                 />
 
@@ -41,7 +44,7 @@ function NewProduct() {
                 <SelectInput
                     id="category-select"
                     label="Categorie"
-                    register={register("categories")}
+                    register={register}
                     placeholder="Selecteer een categorie"
                     options={[
                         { value: 'beds', label: 'Banken' },
@@ -55,33 +58,36 @@ function NewProduct() {
                 />
 
                 <TextInput
+                    type="text"
                     id="dimensions-field"
                     label="Afmetingen (lxbxh)"
                     placeholder="Bv. 30cm x 40cm x 50cm"
-                    register={register("dimensions")}
+                    register={register}
                     errors={errors.dimensions}
                 />
 
                 <TextInput
+                    type="text"
                     id="materials-field"
                     label="Materialen"
                     placeholder="Bv. Hout, staal"
-                    register={register("materials")}
+                    register={register}
                     errors={errors.materials}
                 />
 
                 <Textarea
                     id="message-field"
                     label="Geef een omschrijving"
-                    register={register("message")}
+                    register={register}
                     errors={errors.message}
                 />
 
                 <TextInput
+                    type="text"
                     id="price-field"
                     label="Verkoopprijs"
                     placeholder="€ . . , . ."
-                    register={register("price")}
+                    register={register}
                     errors={errors.price}
                 />
 
@@ -89,14 +95,14 @@ function NewProduct() {
                     <Checkbox
                         id="delivery-checkbox"
                         label="Bezorgen"
-                        register={register("delivery")}
+                        register={register}
                         value="bezorgen"
                     />
 
                     <Checkbox
                         id="pickup-checkbox"
                         label="Ophalen"
-                        register={register("pickup")}
+                        register={register}
                         value="ophalen"
                     />
                 </div>

@@ -1,0 +1,30 @@
+@import '../../scss/variables/variables.scss';
+
+.outer-container-profile {
+  background-color: white;
+  min-height: calc(100vh - 9rem);
+  width: 100vw;
+  display: flex;
+  justify-content: center;
+}
+
+.profile-page {
+  background-color: $light-green-color;
+  border-radius: 0.3125rem;
+  width: 60rem;
+  height: 40rem;
+  margin: 3.5rem 0;
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.section-user-information {
+
+}
+
+.section-user-ridesigns {
+
+}
