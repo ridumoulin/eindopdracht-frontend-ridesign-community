@@ -7,6 +7,8 @@ import Textarea from "../../components/TextArea/Textarea.jsx";
 import Checkbox from "../../components/Checkbox/Checkbox.jsx";
 import SelectInput from "../../components/SelectInput/SelectInput.jsx";
 import {useState} from "react";
+import axios from "axios";
+import {useNavigate} from "react-router-dom";
 
 function NewProduct() {
 
@@ -17,14 +19,26 @@ function NewProduct() {
         criteriaMode: 'all'
     });
 
-    const onSubmit = (data) => {
-        console.log(data);
-    };
+    function handleFormSubmit(data) {
+        newProduct(data);
+    }
 
+    const navigate = useNavigate();
+    const baseUrl = 'http://localhost:5432';
 
+    async function newProduct(data) {
+        try {
+            const response = axios.post(`${baseUrl}/products`, data);
+            console.log("User registered successfully:", response.data);
+        } catch (error) {
+            console.error("Error registering user:", error.response.data);
+        } finally {
+            navigate('/profile')
+        }
+    }
 
     return (
-        <div className="outer-container-new-product" onSubmit={handleSubmit(onSubmit)}>
+        <div className="outer-container-new-product" onSubmit={handleSubmit(handleFormSubmit)}>
             <form className="form-new-product">
                 <h2><GreenDot className="green-dot-title"/> Voeg jouw RiDesign toe <GreenDot className="green-dot-title"/></h2>
 
