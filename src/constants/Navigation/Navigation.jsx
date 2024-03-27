@@ -1,7 +1,9 @@
 import './Navigation.scss';
+import {useContext} from "react";
 import { useForm } from 'react-hook-form';
-import { NavLink, Link } from 'react-router-dom';
+import { NavLink, Link, useNavigate} from 'react-router-dom';
 import { useState } from "react";
+import {AuthContext} from "../../context/AuthContext";
 
 import { ReactComponent as Logo } from '../../assets/nav/logo.svg';
 import { ReactComponent as Heart } from '../../assets/nav/heart-icon.svg';
@@ -11,9 +13,10 @@ import { ReactComponent as Search } from '../../assets/nav/search-icon.svg';
 
 function Navigation() {
     const { register, handleSubmit } = useForm();
-    const [isLoggedIn, setIsLoggedIn] = useState(false);
     const [showProductDropdown, setShowProductDropdown] = useState(false);
     const [showProfileDropdown, setShowProfileDropdown] = useState(false);
+    const navigate = useNavigate();
+    const { isAuth, logout } = useContext(AuthContext);
 
     const onSubmit = (data) => {
         console.log('Search term:', data.search);
@@ -25,7 +28,8 @@ function Navigation() {
     };
 
     const handleLogout = () => {
-        setIsLoggedIn(false);
+        logout();
+        navigate("/sign-in");
     };
 
     const showProductMenu = () => {
@@ -45,7 +49,6 @@ function Navigation() {
     const hideProfileMenu = () => {
         setShowProfileDropdown(false);
     };
-
 
     return (
         <nav className="outer-container-nav">
@@ -67,11 +70,19 @@ function Navigation() {
                         <span onMouseEnter={showProfileMenu} onMouseLeave={hideProfileMenu}>
                             <Profile className="nav-icon"/>
                         </span>
-                        {showProfileDropdown && (
+                        {!isAuth && showProfileDropdown && (
                             <div className="profile-dropdown" onMouseEnter={showProfileMenu} onMouseLeave={hideProfileMenu}>
                                 <ul>
                                     <li><Link to="/sign-in">Inloggen</Link></li>
                                     <li><Link to="/sign-up">Aanmelden</Link></li>
+                                </ul>
+                            </div>
+                        )}
+                        {isAuth && showProfileDropdown && (
+                            <div className="profile-dropdown" onMouseEnter={showProfileMenu} onMouseLeave={hideProfileMenu}>
+                                <ul>
+                                    <li><Link to="/profile">Profiel</Link></li>
+                                    <li><button onClick={handleLogout}>Uitloggen</button></li>
                                 </ul>
                             </div>
                         )}
@@ -96,8 +107,8 @@ function Navigation() {
                                 <NavLink
                                     onMouseEnter={showProductMenu}
                                     onMouseLeave={hideProductMenu}
-                                    className={showProductDropdown ? "active-menu-link" : "default-menu-link"} // Apply the classNames based on the state
-                                    to="/OverviewProducts"
+                                    className={({isActive}) => isActive ? "active-menu-link" : "default-menu-link"}
+                                    to="/products"
                                 >
                                     Producten
                                 </NavLink>
@@ -115,10 +126,10 @@ function Navigation() {
                                 )}
                             </li>
                             <li>
-                                <NavLink className={({isActive}) => isActive ? "active-menu-link" : "default-menu-link"} to="/Designers">Ridesigners</NavLink>
+                                <NavLink className={({isActive}) => isActive ? "active-menu-link" : "default-menu-link"} to="/ri-designers">Ridesigners</NavLink>
                             </li>
                             <li>
-                                <NavLink className={({isActive}) => isActive ? "active-menu-link" : "default-menu-link"} to="/Info">Info</NavLink>
+                                <NavLink className={({isActive}) => isActive ? "active-menu-link" : "default-menu-link"} to="/info">Info</NavLink>
                             </li>
                         </ul>
 

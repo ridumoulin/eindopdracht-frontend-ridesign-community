@@ -1,0 +1,18 @@
+@import '../../scss/variables/variables.scss';
+
+.outer-container-error {
+  background-color: white;
+  min-height: calc(100vh - 9rem);
+  width: 100vw;
+  display: flex;
+  justify-content: center;
+  //align-items: center;
+}
+
+.content-error {
+  display: flex;
+  justify-content: center;
+  text-align: center;
+}
+
+

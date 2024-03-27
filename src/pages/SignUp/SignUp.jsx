@@ -4,6 +4,8 @@ import { useForm } from 'react-hook-form';
 import TextInput from "../../components/TextInput/TextInput.jsx";
 import PasswordInput from "../../components/PasswordInput/PasswordInput.jsx";
 import Checkbox from "../../components/Checkbox/Checkbox.jsx";
+import axios from "axios";
+import { useNavigate } from 'react-router-dom';
 
 function SignUp() {
     const { register, handleSubmit, formState: { errors } } = useForm({
@@ -11,16 +13,32 @@ function SignUp() {
         criteriaMode: 'all'
     });
 
-    const onSubmit = (data) => {
-    };
+    const navigate = useNavigate();
+    const baseUrl = 'http://localhost:5432';
+
+    function handleFormSubmit(data) {
+        signUp(data);
+    }
+
+    async function signUp(data) {
+        try {
+            const response = await axios.post(`${baseUrl}/register`, data);
+            console.log("User registered successfully:", response.data);
+        } catch (error) {
+            console.error("Error registering user:", error.response.data);
+        } finally {
+            navigate('/signin')
+        }
+    }
+
 
     return (
         <div className="outer-container-sign-up">
-            <form className="form-sign-up" onSubmit={handleSubmit(onSubmit)}>
+            <form className="form-sign-up" onSubmit={handleSubmit(handleFormSubmit)}>
                 <h2><GreenDot className="green-dot-title"/> Hey! Hier kun jij je aanmelden! <GreenDot className="green-dot-title"/></h2>
 
                 <TextInput
-                    type="type"
+                    type="email"
                     id="email"
                     label="E-mail"
                     register={register}
@@ -29,6 +47,7 @@ function SignUp() {
                 />
 
                 <PasswordInput
+                    type="password"
                     id="password"
                     label="Wachtwoord"
                     register={register}
