@@ -21,8 +21,8 @@ function SignIn() {
     const handleLogin = async (data) => {
         try {
             const response = await axios.post(`${baseUrl}/authenticate`, data);
-            const { token } = response.data;
-            await authContext.login(token);
+            const { jwt } = response.data;
+            await authContext.login(jwt);
             navigate('/profile');
         } catch (error) {
             console.error("Error met inloggen:", error.response.data);

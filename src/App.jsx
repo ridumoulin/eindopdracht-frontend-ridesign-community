@@ -16,6 +16,7 @@ import Error from './pages/Error/Errors.jsx';
 import RiDesigners from "./pages/RiDesigners/RiDesigners.jsx";
 import { AuthContext } from "./context/AuthContext.jsx";
 import {useContext} from "react";
+import ProductPage from "./pages/ProductPage/ProductPage.jsx";
 
 function App() {
     const { isAuth } = useContext(AuthContext);
@@ -26,6 +27,7 @@ function App() {
             <Routes>
                 <Route path="/" element={<Home />} />
                 <Route path="/products" element={<Products />} />
+                <Route path="/product-page" element={<ProductPage />} />
                 <Route path="/new-product" element={isAuth ? <NewProduct /> : <Navigate to="/sign-in" />} />
                 <Route path="/sign-in" element={<SignIn />} />
                 <Route path="/sign-up" element={<SignUp />} />

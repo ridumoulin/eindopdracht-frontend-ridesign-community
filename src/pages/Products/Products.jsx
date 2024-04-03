@@ -1,6 +1,6 @@
 import './Product.scss';
 import {Link} from "react-router-dom";
-import ProductCardSmall from "../../components/ProductCardSmall/ProductCardSmall.jsx";
+import ProductCardSmall from "../../components/ProductCard/ProductCard.jsx";
 
 function Products() {
     return(

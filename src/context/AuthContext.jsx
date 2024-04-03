@@ -2,7 +2,8 @@ import { createContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import isTokenValid from "../helpers/isTokenValid";
-import PropTypes from 'prop-types';
+import PropTypes from "prop-types";
+import {jwtDecode} from "jwt-decode";
 
 export const AuthContext = createContext({});
 
@@ -34,15 +35,17 @@ function AuthContextProvider({ children }) {
         console.log("JWT Token:", token);
 
         try {
-            const response = await axios.get(
-                `http://localhost:8080/authenticated`,
-                {
-                    headers: {
-                        "Content-Type": "application/json",
-                        Authorization: `Bearer ${token}`,
-                    },
-                }
-            );
+            const decodedToken = jwtDecode(token);
+            const userId = decodedToken.sub;
+
+            const url = `http://localhost:8080/users/${userId}`;
+
+            const response = await axios.get(url, {
+                headers: {
+                    "Content-Type": "application/json",
+                    Authorization: `Bearer ${token}`,
+                },
+            });
 
             const userData = response.data;
 
