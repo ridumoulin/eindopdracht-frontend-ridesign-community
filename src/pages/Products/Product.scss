@@ -45,3 +45,18 @@
   border: 0.1rem solid green;
   flex-basis: calc(70rem - 14.5rem - 2rem);
 }
+
+.category-menu {
+  button {
+    border: none;
+    background-color: transparent;
+    box-shadow: none;
+    color: $dark-green-color;
+    padding: 0;
+    margin: 0;
+    //cursor: pointer;
+    //color: inherit;
+    //font-size: inherit;
+    //font-family: inherit;
+  }
+}

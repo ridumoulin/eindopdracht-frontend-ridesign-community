@@ -24,7 +24,7 @@ function TextInput(props) {
 TextInput.propTypes = {
     id: PropTypes.string.isRequired,
     label: PropTypes.string.isRequired,
-    register: PropTypes.object.isRequired,
+    register: PropTypes.func.isRequired,
     placeholder: PropTypes.string,
     errors: PropTypes.object,
     type: PropTypes.oneOf(['text', 'email']).isRequired,
