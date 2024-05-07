@@ -1,1 +1,21 @@
 @import '../../scss/variables/variables.scss';
+
+.outer-container-product-page {
+  background-color: white;
+  min-height: calc(100vh - 9rem);
+  width: 100vw;
+  display: flex;
+  justify-content: center;
+}
+
+.content-product-page {
+  border: 0.1rem solid red;
+  border-radius: 0.3125rem;
+  width: 70rem;
+  height: 40rem;
+  margin: 3.5rem 0;
+  padding: 2rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

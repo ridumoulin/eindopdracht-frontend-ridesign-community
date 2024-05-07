@@ -1,43 +1,35 @@
+import PropTypes from 'prop-types';
+
 import './ProductCard.scss';
 import { Link } from 'react-router-dom';
-import { useState, useEffect } from 'react';
 
-function ProductCard() {
-    const [products, setProducts] = useState([]);
-
-    useEffect(() => {
-        const fetchData = async () => {
-            try {
-                const response = await fetch('http://localhost:8080/products');
-                console.log(response.data);
-                setProducts(response.data);
-            } catch (error) {
-                console.error('Error fetching products:', error);
-            }
-        };
-
-        fetchData();
-    }, []);
-
+function ProductCard({ title, price, designer, images }) {
     return (
         <div className="product-card-wrapper">
-            {products && products.map(product => (
-                <article key={product.productId} className="product-card">
-                    <section className="product-card-info">
-                        <Link to="/product-page" className="product-title">{product.productTitle}</Link>
-                        <h4 className="product-price">€{product.price.toFixed(2)}</h4>
-                        <p className="designer-product">{product.designer}</p>
-                    </section>
+            <article className="product-card">
+                <section className="product-card-info">
+                    <Link to="/product-page" className="product-title">{title}</Link>
+                    <h4 className="product-price">€{price.toFixed(2)}</h4>
+                    <p className="designer-product">{designer}</p>
+                </section>
 
-                    <section className="product-card-photo-wrapper">
-                        {product.images.length > 0 && (
-                            <img src={product.images[0]} alt={product.productTitle} className="product-card-photo" />
-                        )}
-                    </section>
-                </article>
-            ))}
+                <section className="product-card-photo-wrapper">
+                    {images ? (
+                        <img src={images} alt={title} className="product-card-photo" />
+                    ) : (
+                        <p>Geen foto beschikbaar</p>
+                    )}
+                </section>
+            </article>
         </div>
     );
 }
+
+ProductCard.propTypes = {
+    title: PropTypes.string.isRequired,
+    price: PropTypes.number.isRequired,
+    designer: PropTypes.string.isRequired,
+    images: PropTypes.arrayOf(PropTypes.string).isRequired,
+};
 
 export default ProductCard;

@@ -2,8 +2,6 @@
 
 .product-card-wrapper {
   border: 0.1rem solid red;
-  background-color: $light-green-color;
-  border-radius: 0.3125rem;
   width: 24rem;
   height: 13rem;
 
@@ -14,7 +12,8 @@
 
 .product-card {
   border: 0.1rem solid green;
-  //margin: 1rem;
+  background-color: $light-green-color;
+  border-radius: 0.3125rem;
 
   width: calc(24rem - 2rem);
   height: calc(13rem - 2rem);;
