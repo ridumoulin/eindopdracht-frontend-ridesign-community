@@ -2,17 +2,6 @@ import {useEffect, useState} from 'react';
 import './Product.scss';
 import ProductCard from '../../components/ProductCard/ProductCard.jsx';
 
-async function fetchImage(base64ImageData) {
-    try {
-        const arrayBuffer = Uint8Array.from(atob(base64ImageData), c => c.charCodeAt(0)).buffer;
-        const blob = new Blob([arrayBuffer], { type: 'image/jpeg' });
-        return blob;
-    } catch (error) {
-        console.error('Error fetching image:', error);
-        return null;
-    }
-}
-
 function Products() {
     const [products, setProducts] = useState([]);
     const [currentPage, setCurrentPage] = useState(1);
@@ -24,15 +13,7 @@ function Products() {
             try {
                 const response = await fetch('http://localhost:8080/products');
                 const data = await response.json();
-                const productsWithImages = await Promise.all(data.map(async product => {
-                    const imageBlobs = await Promise.all(product.images.map(async imageByteArray => {
-                        const imageBlob = await fetchImage(imageByteArray);
-                        const imageUrl = URL.createObjectURL(imageBlob);
-                        return imageUrl;
-                    }));
-                    return { ...product, images: imageBlobs };
-                }));
-                setProducts(productsWithImages);
+                setProducts(data);
             } catch (error) {
                 console.error('Error fetching products:', error);
             }
@@ -40,7 +21,6 @@ function Products() {
 
         fetchData();
     }, []);
-
 
     const handleSortByCategory = (category) => {
         const filteredProducts = products.filter(product => product.category === category);
@@ -132,7 +112,6 @@ function Products() {
                         <button onClick={prevPage}>Previous</button>
                         <button onClick={nextPage}>Next</button>
                     </div>
-
 
                 </section>
             </div>
