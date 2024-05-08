@@ -1,15 +1,16 @@
-import './ProductPage.scss';
-import ProductCardLarge from "../../components/ProductCardLarge/ProductCardLarge.jsx";
 import { useEffect, useState } from "react";
-import PropTypes from 'prop-types';
+import { useParams } from "react-router-dom";
+import ProductCardLarge from "../../components/ProductCardLarge/ProductCardLarge.jsx";
+import "./ProductPage.scss"
 
-function ProductPage({ match }) {
+function ProductPage() {
+    const { productId } = useParams();
     const [product, setProduct] = useState(null);
 
     useEffect(() => {
         const fetchProduct = async () => {
             try {
-                const response = await fetch(`http://localhost:8080/products/${match.params.productId}`);
+                const response = await fetch(`http://localhost:8080/products/${productId}`);
                 const data = await response.json();
                 setProduct(data);
             } catch (error) {
@@ -18,7 +19,7 @@ function ProductPage({ match }) {
         };
 
         fetchProduct();
-    }, [match.params.productId]);
+    }, [productId]);
 
     return(
         <div className="outer-container-product-page">
@@ -30,7 +31,7 @@ function ProductPage({ match }) {
                         price={product.price}
                         measurements={product.measurements}
                         materials={product.materials}
-                        designer={product.designer}
+                        designer={product.username}
                         description={product.description}
                         images={product.images}
                     />
@@ -39,13 +40,5 @@ function ProductPage({ match }) {
         </div>
     );
 }
-
-ProductPage.propTypes = {
-    match: PropTypes.shape({
-        params: PropTypes.shape({
-            productId: PropTypes.string.isRequired
-        }).isRequired
-    }).isRequired
-};
 
 export default ProductPage;

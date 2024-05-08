@@ -101,10 +101,11 @@ function Products() {
                         {sortedProducts().map(product => (
                             <ProductCard
                                 key={product.productId}
+                                productId={product.productId}
                                 title={product.productTitle}
                                 price={product.price}
-                                designer={product.designer}
-                                images={product.images}
+                                designer={product.username}
+                                images={"data:image/jpeg;base64, " + product.images[0]}
                             />
                         ))}
                     </div>

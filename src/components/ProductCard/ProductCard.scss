@@ -29,19 +29,32 @@
   text-align: right;
   padding: 1rem 0;
 
-  .product-title {
-    color: black;
-  }
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-end;
+}
 
-  .product-price {
-    color: black;
-    margin-top: 1rem;
-  }
+.product-title {
+  font-size: 0.8rem;
+  width: 10rem;
+  color: black;
+  transition: color 0.3s ease;
+}
 
-  .designer-product {
-    color: black;
-    margin-top: 3.5rem;
-  }
+.product-title:hover {
+  color: white;
+}
+
+.product-price {
+  color: black;
+  margin-top: 1rem;
+}
+
+.designer-product {
+  color: black;
+  margin-top: 0.7rem;
+  font-size: 1rem;
 }
 
 .product-card-photo-wrapper {
