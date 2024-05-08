@@ -1,7 +1,7 @@
 @import '../../scss/variables/variables.scss';
 
 .product-card-large-wrapper {
-  background-color: $light-green-color;
+  //background-color: $light-green-color;
   height: 37rem;
   width: 55rem;
   padding: 2rem;
@@ -22,9 +22,35 @@
   border: 0.1rem solid pink;
   width: 27.5rem;
   height: 100%;
+  position: relative;
+}
 
+.product-card-photo {
+  border-radius: 0.3125rem;
+}
+
+.image-navigation {
+  height: 100%;
+  width: 20%;
+  background-color: transparent;
+  position: absolute;
+  top: 0;
   display: flex;
-  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+}
+
+.image-navigation::before {
+  content: "";
+}
+
+.image-navigation.left {
+  left: 0;
+}
+
+.image-navigation.right {
+  right: 0;
 }
 
 .product-card-large-info {
@@ -32,45 +58,46 @@
   width: 27.5rem;
   height: 100%;
   padding: 1rem;
-}
-
-.product-card-photo {
-  width: 100%;
-  height: auto;
-}
-
-.image-navigation {
-  border: 0.1rem solid red;
-  height: 100%;
-  width: 20%;
-  background: transparent;
+  color: black;
 }
 
 .product-title-large {
-
+  font-size: 1.7rem;
+  margin-bottom: 0.7rem;
 }
 
 .product-price-large {
-
+  font-size: 1.2rem;
+  margin-bottom: 0.7rem;
 }
 
 .product-measurements {
-
+  font-size: 1rem;
+  margin-bottom: 0.7rem;
+  color: $grey-color;
 }
 
 .product-materials {
-
+  font-size: 1rem;
+  margin-bottom: 0.7rem;
+  color: $grey-color;
 }
 
 .designer-product {
-
+  font-size: 1rem;
+  font-weight: bold;
+  margin-bottom: 0.7rem;
 }
 
 .product-description {
-
+  font-size: 1rem;
+  margin-bottom: 0.7rem;
+  color: $grey-color;
 }
 
-
-
-
+.product-title-and-heart {
+  display: flex;
+  flex-direction: row;
+  gap: 1.2rem;
+}
 
