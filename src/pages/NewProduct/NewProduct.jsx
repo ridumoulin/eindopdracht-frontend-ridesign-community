@@ -13,6 +13,7 @@ import {useNavigate} from "react-router-dom";
 function NewProduct() {
 
     const [ values, setValue ] = useState([null, null, null])
+    // const [values, setValues] = useState([{}, {}, {}]);
 
     const { register, handleSubmit, formState: { errors } } = useForm({
         mode: 'onChange',
@@ -24,7 +25,7 @@ function NewProduct() {
     }
 
     const navigate = useNavigate();
-    const baseUrl = 'http://localhost:5432';
+    const baseUrl = 'http://localhost:8080';
 
     async function newProduct(data) {
         try {

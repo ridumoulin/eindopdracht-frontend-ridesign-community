@@ -1,0 +1,21 @@
+@import '../../scss/variables/variables.scss';
+
+.ridesign-card-wrapper {
+  display: flex;
+  flex-direction: column;
+  height: 15rem;
+  width: 18.3rem;
+  padding: 1rem;
+}
+
+.photo-designer-wrapper {
+  height: 10rem;
+  width: 16.3rem;
+  border-radius: 0.3125rem;
+}
+
+.designer-name {
+  height: 3rem;
+  color: black;
+  text-align: center;
+}

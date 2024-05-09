@@ -14,7 +14,7 @@ function SignUp() {
     });
 
     const navigate = useNavigate();
-    const baseUrl = 'http://localhost:5432';
+    const baseUrl = 'http://localhost:8080';
 
     function handleFormSubmit(data) {
         signUp(data);
@@ -30,7 +30,6 @@ function SignUp() {
             navigate('/signin')
         }
     }
-
 
     return (
         <div className="outer-container-sign-up">

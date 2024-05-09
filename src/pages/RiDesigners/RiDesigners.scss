@@ -6,17 +6,41 @@
   width: 100vw;
   display: flex;
   justify-content: center;
+  align-items: center;
 }
 
-.content-ri-designers {
+.content-ridesigners {
+  border: 0.1rem solid red;
   background-color: $light-green-color;
   border-radius: 0.3125rem;
-  width: 150rem;
-  height: 80rem;
-  margin: 3.5rem 0;
+  width: 60rem;
+  height: auto;
+  margin: 5rem 0;
   padding: 2rem;
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   //justify-content: center;
   //align-items: center;
+
 }
+
+.ridesigners {
+  border: 0.1rem solid purple;
+  //width: calc(60rem - 4rem);
+  height: calc(60rem - 2rem - 10rem);
+  gap: 1rem;
+
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  margin-bottom: 1rem;
+}
+
+.buttons-ridesigners {
+  border: 0.1rem solid green;
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+}
+
