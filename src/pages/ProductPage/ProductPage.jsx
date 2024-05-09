@@ -48,7 +48,7 @@ function ProductPage() {
             return;
         }
         try {
-            const response = await axios.post(`http://localhost:8080/users/${getUserEmail()}/products/${productId}/add-to-cart`);
+            const response = await axios.post(`http://localhost:8080/shopping-cart/users/${getUserEmail()}/products/${productId}/add-to-cart`);
             if (response.status === 200) {
                 console.log('Product added to cart successfully');
             } else {

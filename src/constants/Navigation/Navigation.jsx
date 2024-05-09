@@ -4,6 +4,7 @@ import { useForm } from 'react-hook-form';
 import { NavLink, Link, useNavigate} from 'react-router-dom';
 import { useState } from "react";
 import {AuthContext} from "../../context/AuthContext";
+import axios from 'axios';
 
 import { ReactComponent as Logo } from '../../assets/nav/logo.svg';
 import { ReactComponent as Heart } from '../../assets/nav/heart-icon.svg';
@@ -18,8 +19,13 @@ function Navigation() {
     const navigate = useNavigate();
     const { isAuth, logout } = useContext(AuthContext);
 
-    const onSubmit = (data) => {
-        console.log('Search term:', data.search);
+    const onSubmit = async (data) => {
+        try {
+            const response = await axios.get(`http://localhost:8080/product/search?category=${data.search}`);
+            navigate("/products", { state: { searchResults: response.data } });
+        } catch (error) {
+            console.error('Error searching for products:', error);
+        }
     };
 
     const handleChange = (event) => {
