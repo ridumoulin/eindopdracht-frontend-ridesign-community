@@ -4,6 +4,7 @@ import ProductCardLarge from "../../components/ProductCardLarge/ProductCardLarge
 import axios from "axios";
 import "./ProductPage.scss";
 import isTokenValid from "../../helpers/isTokenValid";
+import {jwtDecode} from "jwt-decode";
 
 function ProductPage() {
     const { productId } = useParams();
@@ -30,7 +31,7 @@ function ProductPage() {
             return;
         }
         try {
-            const response = await axios.post(`http://localhost:8080/users/addFavorite/${getUsername()}/${productId}`);
+            const response = await axios.post(`http://localhost:8080/users/addFavorite/${getUserEmail()}/${productId}`);
             if (response.status === 200) {
                 setIsFavorite(true);
             } else {
@@ -66,9 +67,10 @@ function ProductPage() {
         return isLoggedIn;
     };
 
-    const getUsername = () => {
-        const userEmail = localStorage.getItem('userEmail');
-        return userEmail || '';
+    const getUserEmail = () => {
+        const token = localStorage.getItem('token');
+        const decodedToken = jwtDecode(token);
+        return decodedToken.sub;
     };
 
     return(
