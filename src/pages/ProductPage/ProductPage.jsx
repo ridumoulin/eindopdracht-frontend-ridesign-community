@@ -1,7 +1,9 @@
 import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import ProductCardLarge from "../../components/ProductCardLarge/ProductCardLarge.jsx";
-import "./ProductPage.scss"
+import axios from "axios";
+import "./ProductPage.scss";
+import isTokenValid from "../../helpers/isTokenValid";
 
 function ProductPage() {
     const { productId } = useParams();
@@ -12,9 +14,8 @@ function ProductPage() {
     useEffect(() => {
         const fetchProduct = async () => {
             try {
-                const response = await fetch(`http://localhost:8080/products/${productId}`);
-                const data = await response.json();
-                setProduct(data);
+                const response = await axios.get(`http://localhost:8080/products/${productId}`);
+                setProduct(response.data);
             } catch (error) {
                 console.error('Error fetching product:', error);
             }
@@ -25,20 +26,13 @@ function ProductPage() {
 
     const handleAddFavorite = async () => {
         if (!isLoggedIn()) {
-            navigate('/signin');
+            navigate('/sign-in');
             return;
         }
         try {
-            const response = await fetch(`http://localhost:8080/addFavorite/${getUsername()}/${productId}`, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                    // Add other headers as needed, e.g., authorization token
-                },
-                // Add request body if needed
-            });
-            if (response.ok) {
-                setIsFavorite(true); // Update UI to indicate product is now a favorite
+            const response = await axios.post(`http://localhost:8080/users/addFavorite/${getUsername()}/${productId}`);
+            if (response.status === 200) {
+                setIsFavorite(true);
             } else {
                 console.error('Failed to add product to favorites');
             }
@@ -47,17 +41,34 @@ function ProductPage() {
         }
     };
 
+    const handleAddToCart = async () => {
+        if (!isLoggedIn()) {
+            navigate('/sign-in');
+            return;
+        }
+        try {
+            const response = await axios.post(`http://localhost:8080/users/${getUserEmail()}/products/${productId}/add-to-cart`);
+            if (response.status === 200) {
+                console.log('Product added to cart successfully');
+            } else {
+                console.error('Failed to add product to cart');
+            }
+        } catch (error) {
+            console.error('Error adding product to cart:', error);
+        }
+    };
+
     const isLoggedIn = () => {
-        // Implement your logic to check if the user is logged in
-        // For example, check if there is a token in localStorage or a session cookie
-        // Return true if logged in, false otherwise
-        return false; // Replace with your logic
+        const token = localStorage.getItem('token');
+        const isValidToken = isTokenValid(token);
+        const isLoggedIn = !!token && isValidToken;
+        console.log('User logged in:', isLoggedIn);
+        return isLoggedIn;
     };
 
     const getUsername = () => {
-        // Implement your logic to get the username
-        // For example, retrieve it from localStorage or the state if available
-        return ''; // Replace with your logic
+        const userEmail = localStorage.getItem('userEmail');
+        return userEmail || '';
     };
 
     return(
@@ -73,6 +84,9 @@ function ProductPage() {
                         designer={product.username}
                         description={product.description}
                         images={product.images}
+                        isFavorite={isFavorite}
+                        onFavoriteToggle={handleAddFavorite}
+                        onAddToCart={handleAddToCart}
                     />
                 )}
             </div>

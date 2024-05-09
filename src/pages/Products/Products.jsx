@@ -1,6 +1,7 @@
 import {useEffect, useState} from 'react';
 import './Product.scss';
 import ProductCard from '../../components/ProductCard/ProductCard.jsx';
+import axios from "axios";
 
 function Products() {
     const [products, setProducts] = useState([]);
@@ -11,9 +12,8 @@ function Products() {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const response = await fetch('http://localhost:8080/products');
-                const data = await response.json();
-                setProducts(data);
+                const response = await axios.get(`http://localhost:8080/products`);
+                setProducts(response.data);
             } catch (error) {
                 console.error('Error fetching products:', error);
             }

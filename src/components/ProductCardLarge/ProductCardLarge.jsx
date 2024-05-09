@@ -4,12 +4,12 @@ import './ProductCardLarge.scss';
 import { ReactComponent as HG } from '../../assets/general/heart-green.svg';
 import { ReactComponent as Heart } from '../../assets/nav/heart-icon.svg';
 
-function ProductCardLarge({ images, title, price, measurements, materials, designer, description }) {
+function ProductCardLarge({ images, title, price, measurements, materials, designer, description, isFavorite, onFavoriteToggle, onAddToCart }) {
     const [currentImageIndex, setCurrentImageIndex] = useState(0);
-    const [isFavorite, setIsFavorite] = useState(false);
 
     const handleFavoriteToggle = () => {
-        setIsFavorite((prevFavorite) => !prevFavorite);
+        console.log('Heart icon clicked');
+        onFavoriteToggle();
     };
 
     const goToPreviousImage = () => {
@@ -18,6 +18,10 @@ function ProductCardLarge({ images, title, price, measurements, materials, desig
 
     const goToNextImage = () => {
         setCurrentImageIndex((prevIndex) => (prevIndex === images.length - 1 ? 0 : prevIndex + 1));
+    };
+
+    const handleAddToCartClick = () => {
+        onAddToCart();
     };
 
     return (
@@ -43,7 +47,7 @@ function ProductCardLarge({ images, title, price, measurements, materials, desig
                     <p className="product-materials">{materials}</p>
                     <p className="designer-product">Door {designer}</p>
                     <p className="product-description">{description}</p>
-                    <button>Toevoegen winkelmand</button>
+                    <button className="button-shoppingcart" onClick={handleAddToCartClick}>Toevoegen winkelmand</button>
                 </section>
             </div>
         </div>
@@ -58,6 +62,10 @@ ProductCardLarge.propTypes = {
     designer: PropTypes.string.isRequired,
     description: PropTypes.string.isRequired,
     images: PropTypes.arrayOf(PropTypes.string).isRequired,
+    isFavorite: PropTypes.bool.isRequired,
+    onFavoriteToggle: PropTypes.func.isRequired,
+    onAddToCart: PropTypes.func.isRequired,
 };
 
 export default ProductCardLarge;
+
