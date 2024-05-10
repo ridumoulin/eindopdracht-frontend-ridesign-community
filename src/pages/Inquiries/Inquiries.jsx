@@ -4,6 +4,7 @@ import { ReactComponent as GreenDot } from '../../assets/general/green-dot-icon.
 import SelectInput from "../../components/SelectInput/SelectInput.jsx";
 import TextInput from "../../components/TextInput/TextInput.jsx";
 import Textarea from "../../components/TextArea/Textarea.jsx";
+import axios from "axios";
 
 function Inquiries() {
 
@@ -12,8 +13,14 @@ function Inquiries() {
         criteriaMode: 'all'
     });
 
-    const onSubmit = (data) => {
+    const onSubmit = async (data) => {
+        try {
+            await axios.post('http://localhost:8080/inquiries', data);
+        } catch (error) {
+            console.error('Error submitting inquiry:', error);
+        }
     };
+
 
     return (
         <div className="outer-container-inquiries">
