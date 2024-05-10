@@ -3,7 +3,7 @@ import ProductCard from "../../components/ProductCard/ProductCard.jsx";
 import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../../context/AuthContext.jsx";
 import axios from 'axios';
-import InquiryCard from "../../components/InquiryCard/InquiryCard.scss";
+import InquiryCard from "../../components/InquiryCard/InquiryCard.jsx";
 
 function Profile() {
     const { currentUser } = useContext(AuthContext);
@@ -66,7 +66,7 @@ function Profile() {
                 </section>
                 <section className="users-content">
                     <div className="user-ridesigns">
-                        {userProducts().map(product => (
+                        {userProducts.map(product => (
                             <ProductCard
                                 key={product.productId}
                                 productId={product.productId}
@@ -88,11 +88,11 @@ function Profile() {
                     </div>
                     <div className="users-inquiries">
                         <h3>Aanvragen</h3>
-                        {userInquiries().map(inquiry => (
+                        {userInquiries.map(inquiry => (
                             <InquiryCard
-                            inquiryType={inquiry.inquiryType}
-                            email={inquiry.email}
-                            messageField={inquiry.messageField}
+                                inquiryType={inquiry.inquiryType}
+                                email={inquiry.email}
+                                messageField={inquiry.messageField}
                             />
                         ))}
                     </div>

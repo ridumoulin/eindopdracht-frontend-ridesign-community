@@ -21,8 +21,10 @@ function Navigation() {
 
     const onSubmit = async (data) => {
         try {
-            const response = await axios.get(`http://localhost:8080/product/search?category=${data.search}`);
-            navigate("/products", { state: { searchResults: response.data } });
+            console.log(data)
+            const response = await axios.get(`http://localhost:8080/products/search?category=${data.search}`);
+            console.log(response)
+            navigate(`/products`, { state: { searchResults: response.data } });
         } catch (error) {
             console.error('Error searching for products:', error);
         }
