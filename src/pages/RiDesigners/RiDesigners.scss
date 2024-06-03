@@ -10,7 +10,6 @@
 }
 
 .content-ridesigners {
-  border: 0.1rem solid red;
   background-color: $light-green-color;
   border-radius: 0.3125rem;
   width: 60rem;
@@ -25,9 +24,7 @@
 }
 
 .ridesigners {
-  border: 0.1rem solid purple;
-  //width: calc(60rem - 4rem);
-  height: calc(60rem - 2rem - 10rem);
+  height: 40rem;
   gap: 1rem;
 
   display: flex;
@@ -38,7 +35,6 @@
 }
 
 .buttons-ridesigners {
-  border: 0.1rem solid green;
   display: flex;
   justify-content: center;
   gap: 2rem;

@@ -1,12 +1,12 @@
 import PropTypes from 'prop-types';
 import './RiDesignerCard.scss';
 
-function RiDesignerCard({ email, username, image }) {
+function RiDesignerCard({ username, image }) {
     return (
         <div className="ridesign-card-wrapper">
             <section className="photo-designer-wrapper">
                 {image && image.length > 0 ? (
-                    <img src={image} alt={ridesigner} className="ridesigner-card-photo" />
+                    <img src={image} alt={username} className="ridesigner-card-photo" />
                 ) : (
                     <p>Geen foto beschikbaar</p>
                 )}

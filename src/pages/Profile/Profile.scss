@@ -19,14 +19,63 @@
   display: flex;
   flex-direction: row;
   gap: 2rem;
+  color: black;
 }
 
 .user-information {
   border: 0.1rem solid blue;
   flex-basis: 14.5rem;
+
+  h2 {
+    margin: 1rem 0;
+  }
+
+  p {
+    font-size: 1.3rem;
+  }
 }
 
-.section-user-ridesigns {
-  border: 0.1rem solid green;
-  flex-basis: calc(70rem - 14.5rem - 2rem);
+.wrapper-profile-photo {
+  border: 0.1rem solid pink;
+  width: 12rem;
+  height: 12rem;
+  border-radius: 50%;
 }
+
+.user-photo {
+  width: 100%;
+}
+
+.users-content {
+  border: 0.1rem solid purple;
+  flex-basis: calc(70rem - 14.5rem - 2rem);
+  gap: 1rem;
+
+  display: flex;
+  flex-direction: column;
+
+  h3 {
+    font-size: 1.3rem;
+    text-transform: uppercase;
+  }
+}
+
+.user-products {
+  border: 0.1rem solid green;
+  height: calc(20rem - 2rem);
+
+  display: flex;
+  flex-direction: column;
+}
+
+.profile-products {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
+.users-inquiries {
+  border: 0.1rem solid pink;
+  height: calc(20rem - 2rem);
+}
+

@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 function InquiryCard({ inquiryType, email, messageField }) {
     return (
         <div className="inquiry-card-wrapper">
-            <h3>Type verzoek: {inquiryType}</h3>
+            <h4>Type verzoek: {inquiryType}</h4>
             <p>Email: {email}</p>
             <p>Toelichting: {messageField}</p>
         </div>

@@ -7,11 +7,14 @@ import InquiryCard from "../../components/InquiryCard/InquiryCard.jsx";
 
 function Profile() {
     const { user, isAuth } = useContext(AuthContext);
-    const [userData, setUserData] = useState(null);
-    const [userProducts, setUserProducts] = useState([]);
+    const [userData, setUserData] = useState([null]);
     const [userInquiries, setUserInquiries] = useState([]);
     const [currentPage, setCurrentPage] = useState(1);
     const productsPerPage = 4;
+    const [currentProducts, setCurrentProducts] = useState([]);
+
+    const indexOfLastProduct = currentPage * productsPerPage;
+    const indexOfFirstProduct = indexOfLastProduct - productsPerPage;
 
     useEffect(() => {
         const fetchUserData = async () => {
@@ -32,36 +35,51 @@ function Profile() {
             }
         };
 
-        // const fetchUserProducts = async (email) => {
-        //     try {
-        //         const response = await axios.get(`http://localhost:8080/products?username=${email}`);
-        //         setUserProducts(response.data);
-        //     } catch (error) {
-        //         console.error('Error fetching user products:', error);
-        //     }
-        // };
-
-        const fetchUserInquiries = async () => {
-            try {
-                const response = await axios.get(`http://localhost:8080/inquiries`);
-                setUserInquiries(response.data);
-            } catch (error) {
-                console.error('Error fetching user inquiries:', error);
-            }
-        };
-
         if (user) {
             fetchUserData();
-            // fetchUserProducts(user.username);
-            if (user.role === 'Admin') {
-                fetchUserInquiries(user.email);
-            }
         }
     }, [user]);
 
-    const indexOfLastProduct = currentPage * productsPerPage;
-    const indexOfFirstProduct = indexOfLastProduct - productsPerPage;
-    const currentProducts = userProducts.slice(indexOfFirstProduct, indexOfLastProduct);
+
+    useEffect(() => {
+        const fetchUserInquiries = async () => {
+            const token = localStorage.getItem("token");
+
+            try {
+                const response = await axios.get('http://localhost:8080/inquiries' , {
+                    headers: {
+                        "Content-Type": "application/json",
+                        Authorization: `Bearer ${token}`,
+                    },
+                });
+                console.log("Inquiries:", response.data);
+                setUserInquiries(response.data);
+            } catch (error) {
+                console.error('Error fetching user inquiries:', error);
+                if (error.response) {
+                    console.error('Response data:', error.response.data);
+                    console.error('Response status:', error.response.status);
+                    console.error('Response headers:', error.response.headers);
+                } else if (error.request) {
+                    console.error('Request data:', error.request);
+                } else {
+                    console.error('Error message:', error.message);
+                }
+                console.error('Error config:', error.config);
+            }
+        };
+
+        if (user && user.role === 'Admin') {
+            fetchUserInquiries();
+        }
+    }, [user]);
+
+    useEffect(() => {
+        if (userData.products) {
+            setCurrentProducts(userData.products.slice(indexOfFirstProduct, indexOfLastProduct));
+        }
+    }, [userData, currentPage]);
+
 
     const nextPage = () => {
         setCurrentPage(currentPage + 1);
@@ -72,10 +90,10 @@ function Profile() {
     };
 
     if (!isAuth) {
-        return <div>Please log in to view your profile.</div>;
+        return <div>Graag inloggen.</div>;
     }
 
-    if (!userData) {
+    if (!userData || !userData.products) {
         return <div>Loading...</div>;
     }
 
@@ -83,15 +101,20 @@ function Profile() {
         <div className="outer-container-profile">
             <div className="profile-page">
                 <section className="user-information">
-                    <h2 className="first-name">Hey you! {userData.firstname}</h2>
-                    <div>
-                        <img src={"data:image/jpeg;base64," + userData.images[0]} alt={userData.username} className="user-photo" />
+                    <div className="wrapper-profile-photo">
+                        {userData.imageData &&
+                        <img src={"data:image/octet-stream;base64, " + userData.imageData.imageData.replace(`"`, "")} alt={userData.username} className="user-photo" />
+                        }
                     </div>
+                    <h2 className="first-name">Hey you! {userData.firstname}</h2>
                     <p>Gebruikersnaam: {userData.username}</p>
                 </section>
+
                 <section className="users-content">
                     <div className="user-products">
-                        {currentProducts.map(product => (
+                        <h3>Producten</h3>
+                        <div className="profile-products">
+                            {currentProducts.map(product => (
                             <ProductCard
                                 key={product.productId}
                                 productId={product.productId}
@@ -100,21 +123,22 @@ function Profile() {
                                 designer={product.username}
                                 images={"data:image/jpeg;base64," + product.images[0]}
                             />
-                        ))}
+                            ))}
 
-                        {currentPage > 1 && (
-                            <button onClick={prevPage}>Previous</button>
-                        )}
+                            {currentPage > 1 && (
+                                <button onClick={prevPage}>Previous</button>
+                            )}
 
-                        {indexOfLastProduct < userProducts.length && (
-                            <button onClick={nextPage}>Next</button>
-                        )}
+                            {indexOfLastProduct < userData.products.length && (
+                                <button onClick={nextPage}>Next</button>
+                            )}
+                        </div>
                     </div>
                     <div className="users-inquiries">
                         <h3>Aanvragen</h3>
                         {userInquiries.map(inquiry => (
                             <InquiryCard
-                                key={inquiry.id}
+                                key={inquiry.inquiryId}
                                 inquiryType={inquiry.inquiryType}
                                 email={inquiry.email}
                                 messageField={inquiry.messageField}

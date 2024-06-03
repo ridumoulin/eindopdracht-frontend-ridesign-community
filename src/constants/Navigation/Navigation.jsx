@@ -123,12 +123,12 @@ function Navigation() {
                                 {showProductDropdown && (
                                     <div className="product-dropdown" onMouseEnter={showProductMenu} onMouseLeave={hideProductMenu}>
                                         <ul>
-                                            <li><Link to="/sofas">Banken</Link></li>
-                                            <li><Link to="/beds">Bedden</Link></li>
-                                            <li><Link to="/closet">Kasten</Link></li>
-                                            <li><Link to="/chairs-fauteuils">Stoelen & fauteuils</Link></li>
-                                            <li><Link to="/tables">Tafels</Link></li>
-                                            <li><Link to="/garden-furniture">Tuinmeubelen</Link></li>
+                                            <li><Link to="/products?category=Banken">Banken</Link></li>
+                                            <li><Link to="/products?category=Bedden">Bedden</Link></li>
+                                            <li><Link to="/products?category=Kasten">Kasten</Link></li>
+                                            <li><Link to="/products?category=Stoelen-Fauteuils">Stoelen & fauteuils</Link></li>
+                                            <li><Link to="/products?category=Tafels">Tafels</Link></li>
+                                            <li><Link to="/products?category=Tuinmeubelen">Tuinmeubelen</Link></li>
                                         </ul>
                                     </div>
                                 )}
