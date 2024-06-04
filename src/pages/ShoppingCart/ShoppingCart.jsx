@@ -97,10 +97,10 @@ function ShoppingCart() {
                 </div>
                 <div className="pagination-buttons">
                     {currentPage > 1 && (
-                        <button onClick={prevPage} className="pagination-buttons">Previous</button>
+                        <button onClick={prevPage} className="pagination-buttons">Vorige</button>
                     )}
                     {indexOfLastProduct < shoppingCart.products.length && (
-                        <button onClick={nextPage} className="pagination-buttons">Next</button>
+                        <button onClick={nextPage} className="pagination-buttons">Volgende</button>
                     )}
                 </div>
                 <button className="button-checkout">Afrekenen</button>

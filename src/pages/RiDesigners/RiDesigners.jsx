@@ -18,7 +18,6 @@ function RiDesigners() {
                     },
                 });
                 console.log(response.data);
-                // Filter users with riDesigner set to true
                 const filteredDesigners = response.data.filter(user => user.riDesigner === true);
                 setDesigners(filteredDesigners);
             } catch (error) {
@@ -44,15 +43,14 @@ function RiDesigners() {
                     {designers.map(user => (
                         <RiDesignerCard
                             key={user.email}
-                            email={user.email}
                             username={user.username}
-                            // image={"data:image/jpeg;base64, " + user.image[0]}
+                            image={user.imageData ? "data:image/jpeg;base64," + user.imageData.imageData.replace(/"/g, "") : null}
                         />
                     ))}
                 </section>
                 <section className="buttons-ridesigners">
-                    <button onClick={prevPage}>Previous</button>
-                    <button onClick={nextPage}>Next</button>
+                    <button onClick={prevPage}>Vorige</button>
+                    <button onClick={nextPage}>Volgende</button>
                 </section>
             </div>
         </div>

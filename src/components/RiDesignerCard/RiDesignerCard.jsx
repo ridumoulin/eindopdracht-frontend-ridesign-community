@@ -5,7 +5,7 @@ function RiDesignerCard({ username, image }) {
     return (
         <div className="ridesign-card-wrapper">
             <section className="photo-designer-wrapper">
-                {image && image.length > 0 ? (
+                {image ? (
                     <img src={image} alt={username} className="ridesigner-card-photo" />
                 ) : (
                     <p>Geen foto beschikbaar</p>
@@ -19,9 +19,8 @@ function RiDesignerCard({ username, image }) {
 }
 
 RiDesignerCard.propTypes = {
-    email: PropTypes.string.isRequired,
-    username: PropTypes.number.isRequired,
-    image: PropTypes.arrayOf(PropTypes.string).isRequired,
+    username: PropTypes.string.isRequired,
+    image: PropTypes.string.isRequired,
 };
 
 export default RiDesignerCard;

@@ -115,8 +115,8 @@ function Products() {
                             ))}
                         </div>
                         <div className="buttons-products">
-                            <button onClick={prevPage}>Previous</button>
-                            <button onClick={nextPage}>Next</button>
+                            <button onClick={prevPage}>Vorige</button>
+                            <button onClick={nextPage}>Volgende</button>
                         </div>
 
                     </section>

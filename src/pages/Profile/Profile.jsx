@@ -4,14 +4,21 @@ import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../../context/AuthContext.jsx";
 import axios from 'axios';
 import InquiryCard from "../../components/InquiryCard/InquiryCard.jsx";
+import TextInput from "../../components/TextInput/TextInput.jsx";
+import { useForm } from 'react-hook-form';
 
 function Profile() {
     const { user, isAuth } = useContext(AuthContext);
-    const [userData, setUserData] = useState(null); // Initialize as null for better conditional checks
+    const [userData, setUserData] = useState(null);
     const [userInquiries, setUserInquiries] = useState([]);
     const [currentPage, setCurrentPage] = useState(1);
     const productsPerPage = 4;
     const [currentProducts, setCurrentProducts] = useState([]);
+    const [selectedFile, setSelectedFile] = useState(null);
+    const [showUpdateUsernameForm, setShowUpdateUsernameForm] = useState(false);
+    const [newUsername, setNewUsername] = useState('');
+
+    const { register, handleSubmit, formState: { errors } } = useForm();
 
     const indexOfLastProduct = currentPage * productsPerPage;
     const indexOfFirstProduct = indexOfLastProduct - productsPerPage;
@@ -83,12 +90,74 @@ function Profile() {
         }
     }, [userData, currentPage]);
 
+    useEffect(() => {
+        const handlePhotoUpload = async () => {
+            if (selectedFile) {
+                const formData = new FormData();
+                formData.append('image', selectedFile);
+
+                try {
+                    const token = localStorage.getItem("token");
+                    const response = await axios.post(`http://localhost:8080/image/user/${user.email}`, formData, {
+                        headers: {
+                            "Content-Type": "multipart/form-data",
+                            Authorization: `Bearer ${token}`,
+                        },
+                    });
+                    console.log('Photo uploaded successfully:', response.data);
+                    setUserData(prevData => ({
+                        ...prevData,
+                        imageData: response.data.imageData
+                    }));
+                } catch (error) {
+                    console.error('Error uploading photo:', error);
+                }
+            }
+        };
+
+        handlePhotoUpload();
+    }, [selectedFile, user.email]);
+
     const nextPage = () => {
         setCurrentPage(currentPage + 1);
     };
 
     const prevPage = () => {
         setCurrentPage(currentPage - 1);
+    };
+
+    const handleFileChange = (e) => {
+        setSelectedFile(e.target.files[0]);
+    };
+
+    const handleUpdateUsername = async (e) => {
+        e.preventDefault();
+        if (newUsername.trim() === '') {
+            alert("Username cannot be empty");
+            return;
+        }
+
+        try {
+            const token = localStorage.getItem("token");
+            const response = await axios.put(`http://localhost:8080/users/${user.email}`,
+                { username: newUsername },
+                {
+                    headers: {
+                        "Content-Type": "application/json",
+                        Authorization: `Bearer ${token}`,
+                    },
+                }
+            );
+            console.log('Username updated successfully:', response.data);
+            setUserData(prevData => ({
+                ...prevData,
+                username: newUsername
+            }));
+            setShowUpdateUsernameForm(false);
+            setNewUsername('');
+        } catch (error) {
+            console.error('Error updating username:', error);
+        }
     };
 
     if (!isAuth) {
@@ -104,12 +173,37 @@ function Profile() {
             <div className="profile-page">
                 <section className="user-information">
                     <div className="wrapper-profile-photo">
-                        {userData.imageData &&
-                            <img src={"data:image/octet-stream;base64, " + userData.imageData.imageData.replace(/"/g, "")} alt={userData.username} className="user-photo" />
-                        }
+                        {userData.imageData ? (
+                            <img src={"data:image/jpeg;base64," + userData.imageData.imageData.replace(/"/g, "")} alt={userData.username} className="user-photo" />
+                        ) : (
+                            <div>
+                                <input type="file" onChange={handleFileChange} />
+                            </div>
+                        )}
                     </div>
+
                     <h2 className="first-name">Hey you! {userData.firstname}</h2>
                     <p>Gebruikersnaam: {userData.username}</p>
+
+                    <button onClick={() => setShowUpdateUsernameForm(!showUpdateUsernameForm)} className="button-show-update-form">
+                        Gebruikersnaam aanpassen
+                    </button>
+
+                    {showUpdateUsernameForm && (
+                        <form onSubmit={handleSubmit(handleUpdateUsername)} className="update-username-form">
+                            <div style={{ width: '100%', maxWidth: '10rem' }}>
+                                <TextInput
+                                    id="newUsername"
+                                    label=""
+                                    type="text"
+                                    placeholder="Nieuwe gebruikersnaam"
+                                    register={register}
+                                    errors={errors.newUsername}
+                                />
+                            </div>
+                            <button type="submit" className="button-update-username">Opslaan</button>
+                        </form>
+                    )}
                 </section>
 
                 <section className="users-content">
@@ -126,13 +220,14 @@ function Profile() {
                                     images={"data:image/jpeg;base64," + product.images[0]}
                                 />
                             ))}
-
+                        </div>
+                        <div className="button-section-profile">
                             {currentPage > 1 && (
-                                <button onClick={prevPage}>Previous</button>
+                            <button onClick={prevPage} className="button-profile">Vorige</button>
                             )}
 
                             {indexOfLastProduct < userData.products.length && (
-                                <button onClick={nextPage}>Next</button>
+                            <button onClick={nextPage} className="button-profile">Volgende</button>
                             )}
                         </div>
                     </div>
@@ -145,15 +240,17 @@ function Profile() {
                                     key={inquiry.inquiryId}
                                     inquiryType={inquiry.inquiryType}
                                     email={inquiry.email}
-                                    messageField={inquiry.description}
+                                    description={inquiry.description}
                                 />
                                 ))}
+                            </div>
+                            <div className="button-section-profile">
                                 {currentPage > 1 && (
-                                    <button onClick={prevPage}>Previous</button>
+                                <button onClick={prevPage} className="button-profile">Vorige</button>
                                 )}
 
                                 {indexOfLastProduct < userData.products.length && (
-                                    <button onClick={nextPage}>Next</button>
+                                <button onClick={nextPage} className="button-profile">Volgende</button>
                                 )}
                             </div>
                         </div>
