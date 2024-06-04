@@ -77,5 +77,16 @@
 .users-inquiries {
   border: 0.1rem solid pink;
   height: calc(20rem - 2rem);
+
+  display: flex;
+  flex-direction: column;
 }
+
+.users-inquiries-cards {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
+
 

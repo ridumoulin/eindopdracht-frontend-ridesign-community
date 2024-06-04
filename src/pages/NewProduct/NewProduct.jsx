@@ -29,12 +29,18 @@ function NewProduct() {
 
     async function newProduct(data) {
         try {
-            const response = axios.post(`${baseUrl}/products`, data);
-            console.log("User registered successfully:", response.data);
+            const token = localStorage.getItem("token");
+            const response = await axios.post(`${baseUrl}/products`, data, {
+                headers: {
+                    "Content-Type": "application/json",
+                    Authorization: `Bearer ${token}`,
+                },
+            });
+            console.log("Product created successfully:", response.data);
         } catch (error) {
-            console.error("Error registering user:", error.response.data);
+            console.error("Error creating product:", error.response ? error.response.data : error.message);
         } finally {
-            navigate('/profile')
+            navigate('/profile');
         }
     }
 

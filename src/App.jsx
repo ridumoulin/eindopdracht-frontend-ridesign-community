@@ -36,7 +36,7 @@ function App() {
                 <Route path="/shopping-cart" element={isAuth ? <ShoppingCart /> : <Navigate to="/sign-in" />} />
                 <Route path="/info" element={<Info />} />
                 <Route path="/inquiries" element={isAuth ? <Inquiries /> : <Navigate to="/sign-in" />} />
-                <Route path="/ri-designers" element={<RiDesigners />} />
+                <Route path="/ri-designers" element={isAuth ? <RiDesigners /> : <Navigate to="/sign-in"/>} />
                 <Route path="/error" element={<Error />} />
             </Routes>
             <Footer />

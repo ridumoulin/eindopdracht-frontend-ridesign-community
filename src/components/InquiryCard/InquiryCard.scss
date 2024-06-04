@@ -2,17 +2,21 @@
 
 .inquiry-card-wrapper {
   border: 0.1rem solid red;
-  width: 24rem;
+  width: 23rem;
   height: 13rem;
-  padding: 2rem;
+  padding: 1rem;
 
   display: flex;
-  justify-content: center;
-  align-items: center;
+  flex-direction: column;
+  //justify-content: center;
+  //align-items: center;
+  text-align: left;
 
   h4 {
     font-size: 1rem;
   }
 }
+
+
 
 

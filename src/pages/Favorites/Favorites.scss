@@ -9,14 +9,24 @@
 }
 
 .content-favorites {
+  border: 0.1rem solid red;
   background-color: $light-green-color;
   border-radius: 0.3125rem;
-  width: 50rem;
-  height: 80rem;
+  width: 28rem;
+  min-height: 40rem;
   margin: 3.5rem 0;
   padding: 2rem;
   display: flex;
-  flex-direction: row;
-  //justify-content: center;
-  //align-items: center;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+
+}
+
+.pagination-buttons {
+  margin-right: 1rem;
+}
+
+.button-checkout {
+
 }

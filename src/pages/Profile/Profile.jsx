@@ -7,7 +7,7 @@ import InquiryCard from "../../components/InquiryCard/InquiryCard.jsx";
 
 function Profile() {
     const { user, isAuth } = useContext(AuthContext);
-    const [userData, setUserData] = useState([null]);
+    const [userData, setUserData] = useState(null); // Initialize as null for better conditional checks
     const [userInquiries, setUserInquiries] = useState([]);
     const [currentPage, setCurrentPage] = useState(1);
     const productsPerPage = 4;
@@ -40,13 +40,12 @@ function Profile() {
         }
     }, [user]);
 
-
     useEffect(() => {
         const fetchUserInquiries = async () => {
             const token = localStorage.getItem("token");
 
             try {
-                const response = await axios.get('http://localhost:8080/inquiries' , {
+                const response = await axios.get('http://localhost:8080/inquiries', {
                     headers: {
                         "Content-Type": "application/json",
                         Authorization: `Bearer ${token}`,
@@ -69,17 +68,20 @@ function Profile() {
             }
         };
 
-        if (user && user.role === 'Admin') {
-            fetchUserInquiries();
+        if (userData && userData.authorities) {
+            const isAdmin = userData.authorities.some(auth => auth.authority === 'ROLE_ADMIN');
+            console.log('Is Admin:', isAdmin);
+            if (isAdmin) {
+                fetchUserInquiries();
+            }
         }
-    }, [user]);
+    }, [userData]);
 
     useEffect(() => {
-        if (userData.products) {
+        if (userData && userData.products) {
             setCurrentProducts(userData.products.slice(indexOfFirstProduct, indexOfLastProduct));
         }
     }, [userData, currentPage]);
-
 
     const nextPage = () => {
         setCurrentPage(currentPage + 1);
@@ -103,7 +105,7 @@ function Profile() {
                 <section className="user-information">
                     <div className="wrapper-profile-photo">
                         {userData.imageData &&
-                        <img src={"data:image/octet-stream;base64, " + userData.imageData.imageData.replace(`"`, "")} alt={userData.username} className="user-photo" />
+                            <img src={"data:image/octet-stream;base64, " + userData.imageData.imageData.replace(/"/g, "")} alt={userData.username} className="user-photo" />
                         }
                     </div>
                     <h2 className="first-name">Hey you! {userData.firstname}</h2>
@@ -115,14 +117,14 @@ function Profile() {
                         <h3>Producten</h3>
                         <div className="profile-products">
                             {currentProducts.map(product => (
-                            <ProductCard
-                                key={product.productId}
-                                productId={product.productId}
-                                title={product.productTitle}
-                                price={product.price}
-                                designer={product.username}
-                                images={"data:image/jpeg;base64," + product.images[0]}
-                            />
+                                <ProductCard
+                                    key={product.productId}
+                                    productId={product.productId}
+                                    title={product.productTitle}
+                                    price={product.price}
+                                    designer={product.username}
+                                    images={"data:image/jpeg;base64," + product.images[0]}
+                                />
                             ))}
 
                             {currentPage > 1 && (
@@ -134,17 +136,28 @@ function Profile() {
                             )}
                         </div>
                     </div>
-                    <div className="users-inquiries">
-                        <h3>Aanvragen</h3>
-                        {userInquiries.map(inquiry => (
-                            <InquiryCard
-                                key={inquiry.inquiryId}
-                                inquiryType={inquiry.inquiryType}
-                                email={inquiry.email}
-                                messageField={inquiry.messageField}
-                            />
-                        ))}
-                    </div>
+                    {userData && userData.authorities && userData.authorities.some(auth => auth.authority === 'ROLE_ADMIN') && (
+                        <div className="users-inquiries">
+                            <h3>Aanvragen</h3>
+                            <div className="users-inquiries-cards">
+                                {userInquiries.map(inquiry => (
+                                <InquiryCard
+                                    key={inquiry.inquiryId}
+                                    inquiryType={inquiry.inquiryType}
+                                    email={inquiry.email}
+                                    messageField={inquiry.description}
+                                />
+                                ))}
+                                {currentPage > 1 && (
+                                    <button onClick={prevPage}>Previous</button>
+                                )}
+
+                                {indexOfLastProduct < userData.products.length && (
+                                    <button onClick={nextPage}>Next</button>
+                                )}
+                            </div>
+                        </div>
+                    )}
                 </section>
             </div>
         </div>

@@ -4,7 +4,7 @@ import ProductCardLarge from "../../components/ProductCardLarge/ProductCardLarge
 import axios from "axios";
 import "./ProductPage.scss";
 import isTokenValid from "../../helpers/isTokenValid";
-import jwtDecode from "jwt-decode";
+import {jwtDecode} from "jwt-decode";
 
 function ProductPage() {
     const { productId } = useParams();
@@ -32,7 +32,13 @@ function ProductPage() {
             return;
         }
         try {
-            const response = await axios.post(`http://localhost:8080/users/addFavorite/${getUserEmail()}/${productId}`);
+            const token = localStorage.getItem("token");
+            const response = await axios.post(`http://localhost:8080/users/addFavorite/${getUserEmail()}/${productId}`, {
+                headers: {
+                    "Content-Type": "application/json",
+                    Authorization: `Bearer ${token}`,
+                },
+            });
             if (response.status === 200) {
                 setIsFavorite(true);
             } else {
@@ -49,7 +55,13 @@ function ProductPage() {
             return;
         }
         try {
-            const response = await axios.delete(`http://localhost:8080/users/removeFavorite/${getUserEmail()}/${productId}`);
+            const token = localStorage.getItem("token");
+            const response = await axios.delete(`http://localhost:8080/users/removeFavorite/${getUserEmail()}/${productId}`, {
+                headers: {
+                    "Content-Type": "application/json",
+                    Authorization: `Bearer ${token}`,
+                },
+            });
             if (response.status === 200) {
                 setIsFavorite(false);
             } else {
@@ -74,7 +86,13 @@ function ProductPage() {
             return;
         }
         try {
-            const response = await axios.post(`http://localhost:8080/shopping-cart/users/${getUserEmail()}/products/${productId}/add-to-cart`);
+            const token = localStorage.getItem("token");
+            const response = await axios.post(`http://localhost:8080/shopping-cart/users/${getUserEmail()}/products/${productId}/add-to-cart`, {
+                headers: {
+                    "Content-Type": "application/json",
+                    Authorization: `Bearer ${token}`,
+                },
+            });
             if (response.status === 200) {
                 console.log('Product added to cart successfully');
             } else {
@@ -93,9 +111,10 @@ function ProductPage() {
         return isLoggedIn;
     };
 
-    const getUserEmail = () => {  // Correctly using getUserEmail
+    const getUserEmail = () => {
         const token = localStorage.getItem('token');
         const decodedToken = jwtDecode(token);
+        console.log('Decoded Token:', decodedToken);
         return decodedToken.sub;
     };
 

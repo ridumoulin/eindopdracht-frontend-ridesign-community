@@ -21,7 +21,6 @@ function Inquiries() {
         }
     };
 
-
     return (
         <div className="outer-container-inquiries">
             <form className="form-inquiries" onSubmit={handleSubmit(onSubmit)}>
