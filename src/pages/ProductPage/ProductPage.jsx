@@ -4,7 +4,7 @@ import ProductCardLarge from "../../components/ProductCardLarge/ProductCardLarge
 import axios from "axios";
 import "./ProductPage.scss";
 import isTokenValid from "../../helpers/isTokenValid";
-import {jwtDecode} from "jwt-decode";
+import jwtDecode from "jwt-decode";
 
 function ProductPage() {
     const { productId } = useParams();
@@ -17,6 +17,7 @@ function ProductPage() {
             try {
                 const response = await axios.get(`http://localhost:8080/products/${productId}`);
                 setProduct(response.data);
+
             } catch (error) {
                 console.error('Error fetching product:', error);
             }
@@ -39,6 +40,31 @@ function ProductPage() {
             }
         } catch (error) {
             console.error('Error adding product to favorites:', error);
+        }
+    };
+
+    const handleRemoveFavorite = async () => {
+        if (!isLoggedIn()) {
+            navigate('/sign-in');
+            return;
+        }
+        try {
+            const response = await axios.delete(`http://localhost:8080/users/removeFavorite/${getUserEmail()}/${productId}`);
+            if (response.status === 200) {
+                setIsFavorite(false);
+            } else {
+                console.error('Failed to remove product from favorites');
+            }
+        } catch (error) {
+            console.error('Error removing product from favorites:', error);
+        }
+    };
+
+    const handleFavoriteToggle = () => {
+        if (isFavorite) {
+            handleRemoveFavorite();
+        } else {
+            handleAddFavorite();
         }
     };
 
@@ -67,13 +93,13 @@ function ProductPage() {
         return isLoggedIn;
     };
 
-    const getUserEmail = () => {
+    const getUserEmail = () => {  // Correctly using getUserEmail
         const token = localStorage.getItem('token');
         const decodedToken = jwtDecode(token);
         return decodedToken.sub;
     };
 
-    return(
+    return (
         <div className="outer-container-product-page">
             <div className="content-product-page">
                 {product && (
@@ -87,7 +113,7 @@ function ProductPage() {
                         description={product.description}
                         images={product.images}
                         isFavorite={isFavorite}
-                        onFavoriteToggle={handleAddFavorite}
+                        onFavoriteToggle={handleFavoriteToggle}
                         onAddToCart={handleAddToCart}
                     />
                 )}

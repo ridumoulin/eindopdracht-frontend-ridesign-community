@@ -2,8 +2,8 @@ import './Favorites.scss';
 
 function Favorites() {
     return (
-        <div className="outer-container-shopping-cart">
-            <div className="content-shopping-cart">
+        <div className="outer-container-favorites">
+            <div className="content-favorites">
 
             </div>
         </div>
