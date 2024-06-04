@@ -2,21 +2,23 @@
 
 .inquiry-card-wrapper {
   border: 0.1rem solid red;
-  width: 23rem;
+  width: 24rem;
   height: 13rem;
   padding: 1rem;
 
   display: flex;
   flex-direction: column;
-  //justify-content: center;
-  //align-items: center;
   text-align: left;
+  justify-content: space-between;
 
   h4 {
     font-size: 1rem;
   }
 }
 
+.button-deleting-inquiry {
+  color: $dark-green-color;
+}
 
 
 

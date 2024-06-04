@@ -12,8 +12,8 @@ import {useNavigate} from "react-router-dom";
 
 function NewProduct() {
 
-    const [ values, setValue ] = useState([null, null, null])
-    // const [values, setValues] = useState([{}, {}, {}]);
+    // const [ values, setValue ] = useState([null, null, null])
+    const [values, setValue] = useState([{}, {}, {}]);
 
     const { register, handleSubmit, formState: { errors } } = useForm({
         mode: 'onChange',

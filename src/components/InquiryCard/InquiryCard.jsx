@@ -4,9 +4,14 @@ import PropTypes from 'prop-types';
 function InquiryCard({ inquiryType, email, description }) {
     return (
         <div className="inquiry-card-wrapper">
-            <h4>Type verzoek: {inquiryType}</h4>
-            <p>Email: {email}</p>
-            <p>Toelichting: {description}</p>
+            <div>
+                <h4>Type verzoek: {inquiryType}</h4>
+                <p>Email: {email}</p>
+                <p>Toelichting: {description}</p>
+            </div>
+            <div>
+                <div className="button-deleting-inquiry">Verwijder</div>
+            </div>
         </div>
     );
 }
