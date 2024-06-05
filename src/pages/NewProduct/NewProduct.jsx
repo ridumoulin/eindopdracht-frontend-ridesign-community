@@ -28,8 +28,11 @@ function NewProduct() {
     const baseUrl = 'http://localhost:8080';
 
     async function newProduct(data) {
+        const token = localStorage.getItem("token");
+
+        data.photos = values
+
         try {
-            const token = localStorage.getItem("token");
             const response = await axios.post(`${baseUrl}/products`, data, {
                 headers: {
                     "Content-Type": "application/json",
@@ -45,8 +48,8 @@ function NewProduct() {
     }
 
     return (
-        <div className="outer-container-new-product" onSubmit={handleSubmit(handleFormSubmit)}>
-            <form className="form-new-product">
+        <div className="outer-container-new-product">
+            <form className="form-new-product" onSubmit={handleSubmit(handleFormSubmit)}>
                 <h2><GreenDot className="green-dot-title"/> Voeg jouw RiDesign toe <GreenDot className="green-dot-title"/></h2>
 
                 <TextInput

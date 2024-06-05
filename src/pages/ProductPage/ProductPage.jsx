@@ -81,18 +81,22 @@ function ProductPage() {
     };
 
     const handleAddToCart = async () => {
+        console.log("hoi");
         if (!isLoggedIn()) {
             navigate('/sign-in');
             return;
         }
+
+        const token = localStorage.getItem("token");
+        console.log(token);
         try {
-            const token = localStorage.getItem("token");
-            const response = await axios.post(`http://localhost:8080/shopping-cart/users/${getUserEmail()}/products/${productId}/add-to-cart`, {
+            const response = await axios.post(`http://localhost:8080/shopping-cart/user/riannedumoulin@gmail.com/products/3/add-to-cart`, {
                 headers: {
                     "Content-Type": "application/json",
                     Authorization: `Bearer ${token}`,
                 },
             });
+            console.log(response)
             if (response.status === 200) {
                 console.log('Product added to cart successfully');
             } else {

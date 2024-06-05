@@ -17,6 +17,7 @@ function Profile() {
     const [selectedFile, setSelectedFile] = useState(null);
     const [showUpdateUsernameForm, setShowUpdateUsernameForm] = useState(false);
     const [newUsername, setNewUsername] = useState('');
+    // const [profilePhoto, setProfilePhoto] = useState(null);
 
     const { register, handleSubmit, formState: { errors } } = useForm();
 
@@ -29,13 +30,16 @@ function Profile() {
                 try {
                     const token = localStorage.getItem("token");
                     const response = await axios.get(`http://localhost:8080/users/${user.email}`, {
+
                         headers: {
                             "Content-Type": "application/json",
                             Authorization: `Bearer ${token}`,
                         },
                     });
-                    console.log(response.data);
+                    // const blob = new Blob([response.data.imageData.imageData], {type: "image/png"})
+                    // const dataUrl = URL.createObjectURL(blob)
                     setUserData(response.data);
+                    // setProfilePhoto(dataUrl);
                 } catch (error) {
                     console.error('Error fetching user data:', error);
                 }
@@ -95,9 +99,9 @@ function Profile() {
             if (selectedFile) {
                 const formData = new FormData();
                 formData.append('image', selectedFile);
+                const token = localStorage.getItem("token");
 
                 try {
-                    const token = localStorage.getItem("token");
                     const response = await axios.post(`http://localhost:8080/image/user/${user.email}`, formData, {
                         headers: {
                             "Content-Type": "multipart/form-data",
@@ -170,11 +174,12 @@ function Profile() {
 
     return (
         <div className="outer-container-profile">
+            {/*{console.log(userData.imageData.imageData)}*/}
             <div className="profile-page">
                 <section className="user-information">
                     <div className="wrapper-profile-photo">
                         {userData.imageData ? (
-                            <img src={"data:image/jpeg;base64," + userData.imageData.imageData.replace(/"/g, "")} alt={userData.username} className="user-photo" />
+                            <img src={"data:image/jpeg;base64, " + userData.imageData.imageData} alt={userData.username} className="user-photo" />
                         ) : (
                             <div>
                                 <input type="file" onChange={handleFileChange} />

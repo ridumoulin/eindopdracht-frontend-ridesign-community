@@ -21,13 +21,15 @@ function SignUp() {
     }
 
     async function signUp(data) {
+        console.log(data)
         try {
-            const response = await axios.post(`${baseUrl}/register`, data);
+            const response = await axios.post(`${baseUrl}/users/register`, data);
+
             console.log("User registered successfully:", response.data);
         } catch (error) {
             console.error("Error registering user:", error.response.data);
         } finally {
-            navigate('/signin')
+            navigate('/sign-in')
         }
     }
 
