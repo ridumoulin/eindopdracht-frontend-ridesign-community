@@ -44,7 +44,7 @@ function RiDesigners() {
                         <RiDesignerCard
                             key={user.email}
                             username={user.username}
-                            image={user.imageData ? "data:image/jpeg;base64," + user.imageData.imageData.replace(/"/g, "") : null}
+                            image={"data:image/jpeg;base64," + user.imageData}
                         />
                     ))}
                 </section>

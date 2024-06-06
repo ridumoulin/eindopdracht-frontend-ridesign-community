@@ -16,9 +16,6 @@ function Profile() {
     const [currentProducts, setCurrentProducts] = useState([]);
     const [selectedFile, setSelectedFile] = useState(null);
     const [showUpdateUsernameForm, setShowUpdateUsernameForm] = useState(false);
-    const [newUsername, setNewUsername] = useState('');
-    // const [profilePhoto, setProfilePhoto] = useState(null);
-
     const { register, handleSubmit, formState: { errors } } = useForm();
 
     const indexOfLastProduct = currentPage * productsPerPage;
@@ -36,10 +33,7 @@ function Profile() {
                             Authorization: `Bearer ${token}`,
                         },
                     });
-                    // const blob = new Blob([response.data.imageData.imageData], {type: "image/png"})
-                    // const dataUrl = URL.createObjectURL(blob)
                     setUserData(response.data);
-                    // setProfilePhoto(dataUrl);
                 } catch (error) {
                     console.error('Error fetching user data:', error);
                 }
@@ -66,16 +60,6 @@ function Profile() {
                 setUserInquiries(response.data);
             } catch (error) {
                 console.error('Error fetching user inquiries:', error);
-                if (error.response) {
-                    console.error('Response data:', error.response.data);
-                    console.error('Response status:', error.response.status);
-                    console.error('Response headers:', error.response.headers);
-                } else if (error.request) {
-                    console.error('Request data:', error.request);
-                } else {
-                    console.error('Error message:', error.message);
-                }
-                console.error('Error config:', error.config);
             }
         };
 
@@ -134,17 +118,12 @@ function Profile() {
         setSelectedFile(e.target.files[0]);
     };
 
-    const handleUpdateUsername = async (e) => {
-        e.preventDefault();
-        if (newUsername.trim() === '') {
-            alert("Username cannot be empty");
-            return;
-        }
-
+    const handleUpdateUsername = async (data) => {
         try {
             const token = localStorage.getItem("token");
-            const response = await axios.put(`http://localhost:8080/users/${user.email}`,
-                { username: newUsername },
+            const response = await axios.put(
+                `http://localhost:8080/users/${user.email}`,
+                { username: data.newUsername },
                 {
                     headers: {
                         "Content-Type": "application/json",
@@ -153,12 +132,15 @@ function Profile() {
                 }
             );
             console.log('Username updated successfully:', response.data);
-            setUserData(prevData => ({
-                ...prevData,
-                username: newUsername
-            }));
+            const userDataResponse = await axios.get(`http://localhost:8080/users/${user.email}`, {
+                headers: {
+                    "Content-Type": "application/json",
+                    Authorization: `Bearer ${token}`,
+                },
+            });
+
+            setUserData(userDataResponse.data);
             setShowUpdateUsernameForm(false);
-            setNewUsername('');
         } catch (error) {
             console.error('Error updating username:', error);
         }
@@ -174,15 +156,14 @@ function Profile() {
 
     return (
         <div className="outer-container-profile">
-            {/*{console.log(userData.imageData.imageData)}*/}
             <div className="profile-page">
                 <section className="user-information">
                     <div className="wrapper-profile-photo">
                         {userData.imageData ? (
-                            <img src={"data:image/jpeg;base64, " + userData.imageData.imageData} alt={userData.username} className="user-photo" />
+                            <img src={"data:image/jpeg;base64, " + userData.imageData} alt={userData.username} className="user-photo" />
                         ) : (
                             <div>
-                                <input type="file" onChange={handleFileChange} />
+                                <input type="file" onChange={handleFileChange} className="input-photo-designer"/>
                             </div>
                         )}
                     </div>

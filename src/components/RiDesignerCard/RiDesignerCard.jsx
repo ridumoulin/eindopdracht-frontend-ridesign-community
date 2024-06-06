@@ -8,7 +8,7 @@ function RiDesignerCard({ username, image }) {
                 {image ? (
                     <img src={image} alt={username} className="ridesigner-card-photo" />
                 ) : (
-                    <p>Geen foto beschikbaar</p>
+                    <p className="placeholer-ridesigner">Geen foto beschikbaar</p>
                 )}
             </section>
             <section className="designer-name">
