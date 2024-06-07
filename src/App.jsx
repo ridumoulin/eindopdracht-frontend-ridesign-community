@@ -35,7 +35,7 @@ function App() {
                 <Route path="/favorites" element={isAuth ? <Favorites /> : <Navigate to="/sign-in" />} />
                 <Route path="/shopping-cart" element={isAuth ? <ShoppingCart /> : <Navigate to="/sign-in" />} />
                 <Route path="/info" element={<Info />} />
-                <Route path="/inquiries" element={isAuth ? <Inquiries /> : <Navigate to="/sign-in" />} />
+                <Route path="/inquiries" element={<Inquiries />} />
                 <Route path="/ri-designers" element={isAuth ? <RiDesigners /> : <Navigate to="/sign-in"/>} />
                 <Route path="/error" element={<Error />} />
             </Routes>

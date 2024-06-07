@@ -19,8 +19,10 @@ function SignIn() {
     const baseUrl = 'http://localhost:8080';
 
     const handleLogin = async (data) => {
+        console.log(data)
         try {
             const response = await axios.post(`${baseUrl}/authenticate`, data);
+            console.log(response)
             const { jwt } = response.data;
             await authContext.login(jwt);
             navigate('/profile');

@@ -9,7 +9,7 @@ function Favorites() {
     const [favorites, setFavorites] = useState([]);
     const [currentPage, setCurrentPage] = useState(1);
     const productsPerPage = 6;
-    const [currentProducts, setCurrentProducts] = useState([]);
+    const [fullProductDetails, setFullProductDetails] = useState([]);
 
     const indexOfLastProduct = currentPage * productsPerPage;
     const indexOfFirstProduct = indexOfLastProduct - productsPerPage;
@@ -41,17 +41,39 @@ function Favorites() {
     }, [user]);
 
     useEffect(() => {
-        if (favorites.length) {
-            setCurrentProducts(favorites.slice(indexOfFirstProduct, indexOfLastProduct));
+        const fetchProductDetails = async () => {
+            try {
+                const token = localStorage.getItem("token");
+                const productDetailsPromises = favorites.map(async (favorite) => {
+                    console.log(favorite)
+                    const response = await axios.get(`http://localhost:8080/products/${favorite}`, {
+                        headers: {
+                            "Content-Type": "application/json",
+                            Authorization: `Bearer ${token}`,
+                        },
+                    });
+                    return response.data;
+                });
+
+                const fetchedProductDetails = await Promise.all(productDetailsPromises);
+                setFullProductDetails(fetchedProductDetails);
+            } catch (error) {
+                console.error('Error fetching product details:', error);
+            }
+        };
+
+        if (favorites.length > 0) {
+            fetchProductDetails();
         } else {
-            setCurrentProducts([]);
+            setFullProductDetails([]);
         }
-    }, [favorites, currentPage]);
+    }, [favorites]);
 
     const handleDelete = async (productId) => {
+
         try {
             const token = localStorage.getItem("token");
-            await axios.delete(`http://localhost:8080/favorites/user/removeFavorite/${user.email}/${productId}`, {
+            await axios.delete(`http://localhost:8080/users/removeFavorite/${user.username}/${productId}`, {
                 headers: {
                     "Content-Type": "application/json",
                     Authorization: `Bearer ${token}`,
@@ -71,6 +93,8 @@ function Favorites() {
     const prevPage = () => {
         setCurrentPage(currentPage - 1);
     };
+
+    const currentProducts = fullProductDetails.slice(indexOfFirstProduct, indexOfLastProduct);
 
     return (
         <div className="outer-container-favorites">
@@ -94,7 +118,7 @@ function Favorites() {
                     {currentPage > 1 && (
                         <button onClick={prevPage} className="pagination-buttons">Vorige</button>
                     )}
-                    {indexOfLastProduct < favorites.length && (
+                    {indexOfLastProduct < fullProductDetails.length && (
                         <button onClick={nextPage} className="pagination-buttons">Volgende</button>
                     )}
                 </div>

@@ -1,16 +1,19 @@
-import { useEffect, useState } from "react";
+import {useContext, useEffect, useState} from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import ProductCardLarge from "../../components/ProductCardLarge/ProductCardLarge.jsx";
 import axios from "axios";
 import "./ProductPage.scss";
 import isTokenValid from "../../helpers/isTokenValid";
 import {jwtDecode} from "jwt-decode";
+import {AuthContext} from "../../context/AuthContext.jsx";
 
 function ProductPage() {
     const { productId } = useParams();
     const [product, setProduct] = useState(null);
     const [isFavorite, setIsFavorite] = useState(false);
     const navigate = useNavigate();
+
+    const { user } = useContext(AuthContext);
 
     useEffect(() => {
         const fetchProduct = async () => {
@@ -33,7 +36,7 @@ function ProductPage() {
         }
         try {
             const token = localStorage.getItem("token");
-            const response = await axios.post(`http://localhost:8080/users/addFavorite/${getUserEmail()}/${productId}`, {
+            const response = await axios.post(`http://localhost:8080/users/addFavorite/${user.username}/${productId}`, {
                 headers: {
                     "Content-Type": "application/json",
                     Authorization: `Bearer ${token}`,
@@ -90,7 +93,7 @@ function ProductPage() {
         const token = localStorage.getItem("token");
         console.log(token);
         try {
-            const response = await axios.post(`http://localhost:8080/shopping-cart/user/riannedumoulin@gmail.com/products/3/add-to-cart`, {
+            const response = await axios.post(`http://localhost:8080/shopping-cart/user/${getUserEmail()}/products/${productId}/add-to-cart`, {
                 headers: {
                     "Content-Type": "application/json",
                     Authorization: `Bearer ${token}`,
@@ -114,6 +117,8 @@ function ProductPage() {
         console.log('User logged in:', isLoggedIn);
         return isLoggedIn;
     };
+
+
 
     const getUserEmail = () => {
         const token = localStorage.getItem('token');

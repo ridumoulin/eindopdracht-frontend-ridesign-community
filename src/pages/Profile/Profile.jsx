@@ -72,6 +72,21 @@ function Profile() {
         }
     }, [userData]);
 
+    const deleteInquiry = async (inquiryId) => {
+        try {
+            const token = localStorage.getItem("token");
+            await axios.delete(`http://localhost:8080/inquiries/${inquiryId}`, {
+                headers: {
+                    "Content-Type": "application/json",
+                    Authorization: `Bearer ${token}`,
+                },
+            });
+            setUserInquiries(prevInquiries => prevInquiries.filter(inquiry => inquiry.inquiryId !== inquiryId));
+        } catch (error) {
+            console.error('Error deleting inquiry:', error);
+        }
+    };
+
     useEffect(() => {
         if (userData && userData.products) {
             setCurrentProducts(userData.products.slice(indexOfFirstProduct, indexOfLastProduct));
@@ -222,12 +237,13 @@ function Profile() {
                             <h3>Aanvragen</h3>
                             <div className="users-inquiries-cards">
                                 {userInquiries.map(inquiry => (
-                                <InquiryCard
-                                    key={inquiry.inquiryId}
-                                    inquiryType={inquiry.inquiryType}
-                                    email={inquiry.email}
-                                    description={inquiry.description}
-                                />
+                                    <InquiryCard
+                                        key={inquiry.inquiryId}
+                                        inquiryType={inquiry.inquiryType}
+                                        email={inquiry.email}
+                                        description={inquiry.description}
+                                        onDelete={() => deleteInquiry(inquiry.inquiryId)}
+                                    />
                                 ))}
                             </div>
                             <div className="button-section-profile">
