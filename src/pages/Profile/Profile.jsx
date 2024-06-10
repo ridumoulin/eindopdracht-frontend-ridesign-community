@@ -6,6 +6,7 @@ import axios from 'axios';
 import InquiryCard from "../../components/InquiryCard/InquiryCard.jsx";
 import TextInput from "../../components/TextInput/TextInput.jsx";
 import { useForm } from 'react-hook-form';
+import PhotoUpload from "../../components/PhotoUpload/PhotoUpload.jsx";
 
 function Profile() {
     const { user, isAuth } = useContext(AuthContext);
@@ -16,7 +17,8 @@ function Profile() {
     const [currentProducts, setCurrentProducts] = useState([]);
     const [selectedFile, setSelectedFile] = useState(null);
     const [showUpdateUsernameForm, setShowUpdateUsernameForm] = useState(false);
-    const { register, handleSubmit, formState: { errors } } = useForm();
+    const { register, handleSubmit, formState: { errors }} = useForm();
+
 
     const indexOfLastProduct = currentPage * productsPerPage;
     const indexOfFirstProduct = indexOfLastProduct - productsPerPage;
@@ -27,7 +29,6 @@ function Profile() {
                 try {
                     const token = localStorage.getItem("token");
                     const response = await axios.get(`http://localhost:8080/users/${user.email}`, {
-
                         headers: {
                             "Content-Type": "application/json",
                             Authorization: `Bearer ${token}`,
@@ -95,9 +96,12 @@ function Profile() {
 
     useEffect(() => {
         const handlePhotoUpload = async () => {
+
+            console.log(selectedFile)
+
             if (selectedFile) {
                 const formData = new FormData();
-                formData.append('image', selectedFile);
+                formData.append('imageData', selectedFile);
                 const token = localStorage.getItem("token");
 
                 try {
@@ -129,8 +133,8 @@ function Profile() {
         setCurrentPage(currentPage - 1);
     };
 
-    const handleFileChange = (e) => {
-        setSelectedFile(e.target.files[0]);
+    const handleFileChange = (file) => {
+        setSelectedFile(file);
     };
 
     const handleUpdateUsername = async (data) => {
@@ -177,9 +181,13 @@ function Profile() {
                         {userData.imageData ? (
                             <img src={"data:image/jpeg;base64, " + userData.imageData} alt={userData.username} className="user-photo" />
                         ) : (
-                            <div>
-                                <input type="file" onChange={handleFileChange} className="input-photo-designer"/>
-                            </div>
+                            <PhotoUpload
+                                value={selectedFile ? selectedFile : null}
+                                setValue={setSelectedFile}
+                                handleFileChange={handleFileChange}
+                                register={register}
+                                errors={errors.photo}
+                            />
                         )}
                     </div>
 

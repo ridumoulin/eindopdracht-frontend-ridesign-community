@@ -17,13 +17,23 @@ function Inquiries() {
         criteriaMode: 'all'
     });
 
-    const onSubmit = async (data) => {
+    const newInquiry = async (data) => {
+        const token = localStorage.getItem("token");
+        const config = {
+            headers: {
+                "Content-Type": "application/json",
+                Authorization: `Bearer ${token}`,
+            },
+        };
+
         setSubmitting(true);
         try {
-            await axios.post('http://localhost:8080/inquiries', data);
+            const response = await axios.post('http://localhost:8080/inquiries', data, config);
             setSubmitSuccess(true);
+            console.log("Inquiry submitted successfully:", response.data);
         } catch (error) {
-            setSubmitError(error);
+            setSubmitError(error.response ? error.response.data : error.message);
+            console.error("Error submitting inquiry:", error.response ? error.response.data : error.message);
         } finally {
             setSubmitting(false);
         }
@@ -31,15 +41,15 @@ function Inquiries() {
 
     return (
         <div className="outer-container-inquiries">
-            <form className="form-inquiries" onSubmit={handleSubmit(onSubmit)}>
+            <form className="form-inquiries" onSubmit={handleSubmit(newInquiry)}>
                 <h2>
                     <GreenDot className="green-dot-title" /> Heb jij een aanvraag voor een RiDesign of heb je een meubelstuk dat je wil inleveren?{' '}
                     <GreenDot className="green-dot-title" />
                 </h2>
 
                 <SelectInput
-                    id={'inquiry-type'}
-                    label={'Type verzoek'}
+                    id="inquiryType"
+                    label="Type verzoek"
                     register={register}
                     options={[
                         { value: 'request', label: 'Aanvraag RiDesign' },
@@ -49,16 +59,16 @@ function Inquiries() {
                 />
 
                 <TextInput
-                    id={'email'}
-                    label={'E-mail'}
+                    id="email"
+                    label="E-mail"
                     register={register}
-                    type={'email'}
+                    type="email"
                     validate={(value) => value.includes('@')}
                     errors={errors.email}
                 />
 
                 <Textarea
-                    id="message-field"
+                    id="description"
                     label="Geef een toelichting"
                     register={register}
                     errors={errors.message}

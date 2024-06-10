@@ -81,7 +81,7 @@ function SignUp() {
 
                 <div className="checkbox-container-ri-designer">
                     <Checkbox
-                        id="isRiDesigner-checkbox"
+                        id="riDesigner"
                         label="Ben jij een RiDesigner?"
                         register={register("riDesigner")}
                         value="true"

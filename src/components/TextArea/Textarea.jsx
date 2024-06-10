@@ -5,8 +5,8 @@ function Textarea(props) {
     const { id, register, placeholder } = props;
     const textareaProps = register(id, {
         required: true,
-        minLength: 30,
-        maxLength: 200,
+        minLength: 50,
+        maxLength: 1000,
     });
 
     return (
