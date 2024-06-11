@@ -2,7 +2,7 @@ import PropTypes from 'prop-types';
 import './Textarea.scss';
 
 function Textarea(props) {
-    const { id, register, placeholder } = props;
+    const { id, register, placeholder, errors } = props;
     const textareaProps = register(id, {
         required: true,
         minLength: 50,
@@ -18,7 +18,13 @@ function Textarea(props) {
                 placeholder={placeholder}
                 className="textarea-input-form"
             />
-            {props.errors && <span className="error-message">{props.errors.message}</span>}
+
+            {errors && errors.type === "minLength" && (
+                <span className="error-message">Omschrijving moet minimaal uit 50 karakters bestaan</span>
+            )}
+            {errors && errors.type === "maxLength" && (
+                <span className="error-message">Omschrijving mag maximaal uit 50 karakters bestaan</span>
+            )}
         </label>
     );
 }

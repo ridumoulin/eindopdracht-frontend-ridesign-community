@@ -29,7 +29,10 @@ function PasswordInput(props) {
                     {showPassword ? <EyeSlash /> : <Eye />}
                 </div>
             </div>
-            {errors && <span className="error-message">{errors.message}</span>}
+            {errors && errors.message && <span className="error-message">{errors.message}</span>}
+            {errors && errors.type === "minLength" && (
+                <span className="error-message">Wachtwoord moet minimaal uit 8 karakters bestaan</span>
+            )}
         </label>
     );
 }

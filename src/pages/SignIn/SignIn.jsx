@@ -1,5 +1,5 @@
 import './SignIn.scss';
-import {useContext} from "react";
+import {useContext, useState} from "react";
 import { AuthContext } from "../../context/AuthContext.jsx";
 import {Link, useNavigate} from 'react-router-dom';
 import { ReactComponent as GreenDot } from '../../assets/general/green-dot-icon.svg';
@@ -18,6 +18,7 @@ function SignIn() {
     const authContext = useContext(AuthContext);
     const navigate = useNavigate();
     const baseUrl = 'http://localhost:8080';
+    const [errorMessage, setErrorMessage] = useState("");
 
     const handleLogin = async (data) => {
         console.log(data)
@@ -29,6 +30,7 @@ function SignIn() {
             navigate('/profile');
         } catch (error) {
             console.error("Error met inloggen:", error.response.data);
+            setErrorMessage("Onjuiste e-mail of wachtwoord");
         } finally {
             navigate('/profile')
         }
@@ -57,6 +59,8 @@ function SignIn() {
                     placeholder="Vul hier je wachwoord in"
                     errors={errors.password}
                 />
+
+                {errorMessage && <span className="error-message">{errorMessage}</span>}
 
                 <Button text="Inloggen" type="submit" />
             </form>
