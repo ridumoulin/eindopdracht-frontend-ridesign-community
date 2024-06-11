@@ -3,6 +3,7 @@ import ProductCardSCFV from "../../components/ProductCardSCFV/ProductCardSCFV.js
 import { useEffect, useState, useContext } from "react";
 import axios from "axios";
 import { AuthContext } from "../../context/AuthContext";
+import Button from "../../components/Button/Button.jsx";
 
 function ShoppingCart() {
     const { user } = useContext(AuthContext);
@@ -97,13 +98,13 @@ function ShoppingCart() {
                 </div>
                 <div className="pagination-buttons">
                     {currentPage > 1 && (
-                        <button onClick={prevPage} className="pagination-buttons">Vorige</button>
+                        <Button type="button" onClick={prevPage} text="Vorige" className="pagination-buttons" />
                     )}
                     {indexOfLastProduct < shoppingCart.products.length && (
-                        <button onClick={nextPage} className="pagination-buttons">Volgende</button>
+                        <Button type="button" onClick={nextPage} text="Volgende" className="pagination-buttons"/>
                     )}
                 </div>
-                <button className="button-checkout">Afrekenen</button>
+                <Button type="button" text="Afrekenen" className="button-checkout"/>
             </div>
         </div>
     );

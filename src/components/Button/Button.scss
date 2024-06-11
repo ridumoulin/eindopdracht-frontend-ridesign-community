@@ -1,0 +1,12 @@
+@import '../../scss/variables/variables.scss';
+
+.general-button {
+  font-family: $general-font;
+  border: none;
+  box-shadow: 0 0.125rem 0.25rem rgba(142, 137, 135, 0.8);
+  background-color: $dark-green-color;
+  text-transform: uppercase;
+  text-align: center;
+  outline: none;
+  margin-top: 1.5rem;
+}

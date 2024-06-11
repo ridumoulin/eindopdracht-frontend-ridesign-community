@@ -10,6 +10,7 @@ import axios from "axios";
 import {useNavigate} from "react-router-dom";
 import PhotosUpload from "../../components/PhotosUpload/PhotosUpload.jsx";
 import {prepareProductData} from "../../helpers/prepareProductData.jsx";
+import Button from "../../components/Button/Button.jsx";
 
 
 function NewProduct() {
@@ -131,9 +132,7 @@ function NewProduct() {
                     />
                 </div>
 
-                <button type="submit" >
-                    RiDesign toevoegen
-                </button>
+                <Button text="RiDesign toevoegen" type="submit" />
 
             </form>
         </div>

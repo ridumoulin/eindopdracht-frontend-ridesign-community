@@ -5,7 +5,7 @@ import './PhotoUpload.scss';
 function PhotoUpload({ value, setValue, register, errors }) {
     const handleFileChange = (e) => {
         const newFile = e.target.files[0];
-        setValue({ imageData: newFile });
+        setValue(newFile);
     };
 
     return (

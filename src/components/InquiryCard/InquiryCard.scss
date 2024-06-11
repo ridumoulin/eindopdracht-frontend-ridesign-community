@@ -22,7 +22,11 @@
 
 .button-deleting-inquiry {
   color: $dark-green-color;
+  font-size: 0.8rem;
 }
 
-
+.button-deleting-inquiry:hover {
+  cursor: pointer;
+  color: black;
+}
 

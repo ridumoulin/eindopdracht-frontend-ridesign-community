@@ -6,6 +6,7 @@ import SelectInput from '../../components/SelectInput/SelectInput.jsx';
 import TextInput from '../../components/TextInput/TextInput.jsx';
 import Textarea from '../../components/TextArea/Textarea.jsx';
 import axios from 'axios';
+import Button from "../../components/Button/Button.jsx";
 
 function Inquiries() {
     const [submitting, setSubmitting] = useState(false);
@@ -73,9 +74,9 @@ function Inquiries() {
                     register={register}
                     errors={errors.message}
                 />
-                <button type="submit" disabled={submitting}>
-                    {submitting ? 'Verzoek wordt verstuurd...' : 'Verzoek versturen'}
-                </button>
+
+                <Button type="submit" text={submitting ? 'Verzoek wordt verstuurd...' : 'Verzoek versturen'} />
+
                 {submitSuccess && <p className="message-inquiry" >Aanvraag succesvol verzonden!</p>}
                 {submitError && <p>Fout versturen aanvraag: {submitError.message}</p>}
             </form>

@@ -3,6 +3,7 @@ import ProductCardSCFV from "../../components/ProductCardSCFV/ProductCardSCFV.js
 import { useEffect, useState, useContext } from "react";
 import axios from "axios";
 import { AuthContext } from "../../context/AuthContext";
+import Button from "../../components/Button/Button.jsx";
 
 function Favorites() {
     const { user } = useContext(AuthContext);
@@ -116,10 +117,11 @@ function Favorites() {
                 )}
                 <div className="pagination-buttons">
                     {currentPage > 1 && (
-                        <button onClick={prevPage} className="pagination-buttons">Vorige</button>
+                        <Button type="button" onClick={prevPage} text="Vorige" className="pagination-buttons" />
+
                     )}
                     {indexOfLastProduct < fullProductDetails.length && (
-                        <button onClick={nextPage} className="pagination-buttons">Volgende</button>
+                        <Button type="button" onClick={nextPage} text="Volgende" className="pagination-buttons"/>
                     )}
                 </div>
             </div>

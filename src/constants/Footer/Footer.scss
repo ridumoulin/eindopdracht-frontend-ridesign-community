@@ -17,25 +17,39 @@
   width: 100%;
   display: flex;
   align-items: center;
-  color: #1a1a1a;
   font-size: 1rem;
 }
 
 .footer-up {
-  //border: 0.1rem solid pink;
   border: 0.15rem solid $sand-color;
   background-color: $creme-color;
-  justify-content: flex-end;
-  padding-right: 2.7rem;
   gap: 1rem;
+  padding: 2rem;
+
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
 
   p {
     color: $dark-green-color;
   }
 }
 
+.footer-up-right {
+  width: 18rem;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.insta-logo-footer {
+  height: 3rem;
+  width: 3rem;
+}
+
 .footer-down {
-  // border: 0.1rem solid green;
   background-color: $sand-color;
   justify-content: flex-start;
   padding-left: 2.7rem;

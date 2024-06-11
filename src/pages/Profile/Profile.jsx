@@ -1,5 +1,5 @@
 import './Profile.scss';
-import ProductCard from "../../components/ProductCard/ProductCard.jsx";
+import ProductCardDelete from "../../components/ProductCard/ProductCardDelete.jsx";
 import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../../context/AuthContext.jsx";
 import axios from 'axios';
@@ -7,21 +7,15 @@ import InquiryCard from "../../components/InquiryCard/InquiryCard.jsx";
 import TextInput from "../../components/TextInput/TextInput.jsx";
 import { useForm } from 'react-hook-form';
 import PhotoUpload from "../../components/PhotoUpload/PhotoUpload.jsx";
+import Button from "../../components/Button/Button.jsx";
 
 function Profile() {
     const { user, isAuth } = useContext(AuthContext);
     const [userData, setUserData] = useState(null);
     const [userInquiries, setUserInquiries] = useState([]);
-    const [currentPage, setCurrentPage] = useState(1);
-    const productsPerPage = 4;
-    const [currentProducts, setCurrentProducts] = useState([]);
     const [selectedFile, setSelectedFile] = useState(null);
     const [showUpdateUsernameForm, setShowUpdateUsernameForm] = useState(false);
     const { register, handleSubmit, formState: { errors }} = useForm();
-
-
-    const indexOfLastProduct = currentPage * productsPerPage;
-    const indexOfFirstProduct = indexOfLastProduct - productsPerPage;
 
     useEffect(() => {
         const fetchUserData = async () => {
@@ -74,8 +68,8 @@ function Profile() {
     }, [userData]);
 
     const deleteInquiry = async (inquiryId) => {
+        const token = localStorage.getItem("token");
         try {
-            const token = localStorage.getItem("token");
             await axios.delete(`http://localhost:8080/inquiries/${inquiryId}`, {
                 headers: {
                     "Content-Type": "application/json",
@@ -88,11 +82,26 @@ function Profile() {
         }
     };
 
-    useEffect(() => {
-        if (userData && userData.products) {
-            setCurrentProducts(userData.products.slice(indexOfFirstProduct, indexOfLastProduct));
+    const deleteProduct = async (productId) => {
+        const token = localStorage.getItem("token");
+        try {
+            await axios.delete(`http://localhost:8080/product/${productId}`, {
+                headers: {
+                    "Content-Type": "application/json",
+                    Authorization: `Bearer ${token}`,
+                },
+            });
+
+            const updatedProducts = userData.products.filter(product => product.productId !== productId);
+
+            setUserData(prevUserData => ({
+                ...prevUserData,
+                products: updatedProducts
+            }));
+        } catch (error) {
+            console.error('Error deleting product:', error);
         }
-    }, [userData, currentPage]);
+    };
 
     useEffect(() => {
         const handlePhotoUpload = async () => {
@@ -123,15 +132,7 @@ function Profile() {
         };
 
         handlePhotoUpload();
-    }, [selectedFile, user.email]);
-
-    const nextPage = () => {
-        setCurrentPage(currentPage + 1);
-    };
-
-    const prevPage = () => {
-        setCurrentPage(currentPage - 1);
-    };
+    }, [selectedFile, user.email, setUserData]);
 
     const handleFileChange = (file) => {
         setSelectedFile(file);
@@ -194,9 +195,8 @@ function Profile() {
                     <h2 className="first-name">Hey you! {userData.firstname}</h2>
                     <p>Gebruikersnaam: {userData.username}</p>
 
-                    <button onClick={() => setShowUpdateUsernameForm(!showUpdateUsernameForm)} className="button-show-update-form">
-                        Gebruikersnaam aanpassen
-                    </button>
+                    <Button onClick={() => setShowUpdateUsernameForm(!showUpdateUsernameForm)} className="button-show-update-form" text="Gebruikersnaam aanpassen" />
+
 
                     {showUpdateUsernameForm && (
                         <form onSubmit={handleSubmit(handleUpdateUsername)} className="update-username-form">
@@ -219,25 +219,17 @@ function Profile() {
                     <div className="user-products">
                         <h3>Producten</h3>
                         <div className="profile-products">
-                            {currentProducts.map(product => (
-                                <ProductCard
+                            {userData.products.map(product => (
+                                <ProductCardDelete
                                     key={product.productId}
                                     productId={product.productId}
                                     title={product.productTitle}
                                     price={product.price}
                                     designer={product.username}
                                     images={"data:image/jpeg;base64," + product.images[0]}
+                                    onDelete={() => deleteProduct(product.productId)}
                                 />
                             ))}
-                        </div>
-                        <div className="button-section-profile">
-                            {currentPage > 1 && (
-                            <button onClick={prevPage} className="button-profile">Vorige</button>
-                            )}
-
-                            {indexOfLastProduct < userData.products.length && (
-                            <button onClick={nextPage} className="button-profile">Volgende</button>
-                            )}
                         </div>
                     </div>
                     {userData && userData.authorities && userData.authorities.some(auth => auth.authority === 'ROLE_ADMIN') && (
@@ -253,15 +245,6 @@ function Profile() {
                                         onDelete={() => deleteInquiry(inquiry.inquiryId)}
                                     />
                                 ))}
-                            </div>
-                            <div className="button-section-profile">
-                                {currentPage > 1 && (
-                                <button onClick={prevPage} className="button-profile">Vorige</button>
-                                )}
-
-                                {indexOfLastProduct < userData.products.length && (
-                                <button onClick={nextPage} className="button-profile">Volgende</button>
-                                )}
                             </div>
                         </div>
                     )}

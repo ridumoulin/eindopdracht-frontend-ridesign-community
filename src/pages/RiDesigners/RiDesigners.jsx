@@ -2,6 +2,7 @@ import './RiDesigners.scss';
 import RiDesignerCard from "../../components/RiDesignerCard/RiDesignerCard.jsx";
 import { useEffect, useState } from "react";
 import axios from "axios";
+import Button from "../../components/Button/Button.jsx";
 
 function RiDesigners() {
     const [designers, setDesigners] = useState([]);
@@ -49,8 +50,8 @@ function RiDesigners() {
                     ))}
                 </section>
                 <section className="buttons-ridesigners">
-                    <button onClick={prevPage}>Vorige</button>
-                    <button onClick={nextPage}>Volgende</button>
+                    <Button type="button" onClick={prevPage} text="Vorige" />
+                    <Button type="button" onClick={nextPage} text="Volgende" />
                 </section>
             </div>
         </div>

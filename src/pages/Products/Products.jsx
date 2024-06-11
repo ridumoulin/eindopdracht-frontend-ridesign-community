@@ -3,6 +3,7 @@ import './Product.scss';
 import ProductCard from '../../components/ProductCard/ProductCard.jsx';
 import axios from "axios";
 import { useLocation } from "react-router-dom";
+import Button from "../../components/Button/Button.jsx";
 
 function Products() {
     const [products, setProducts] = useState([]);
@@ -115,8 +116,8 @@ function Products() {
                             ))}
                         </div>
                         <div className="buttons-products">
-                            <button onClick={prevPage}>Vorige</button>
-                            <button onClick={nextPage}>Volgende</button>
+                            <Button type="button" onClick={prevPage} text="Vorige" />
+                            <Button type="button" onClick={nextPage} text="Volgende" />
                         </div>
 
                     </section>

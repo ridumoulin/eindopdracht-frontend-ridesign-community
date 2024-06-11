@@ -7,6 +7,7 @@ import { useForm } from 'react-hook-form';
 import PasswordInput from "../../components/PasswordInput/PasswordInput.jsx";
 import TextInput from "../../components/TextInput/TextInput.jsx";
 import axios from "axios";
+import Button from "../../components/Button/Button.jsx";
 
 function SignIn() {
     const { register, handleSubmit, formState: { errors } } = useForm({
@@ -56,7 +57,8 @@ function SignIn() {
                     placeholder="Vul hier je wachwoord in"
                     errors={errors.password}
                 />
-                <button type="submit">Inloggen</button>
+
+                <Button text="Inloggen" type="submit" />
             </form>
         </div>
     );
