@@ -70,15 +70,26 @@ function Profile() {
     const deleteInquiry = async (inquiryId) => {
         const token = localStorage.getItem("token");
         try {
-            await axios.delete(`http://localhost:8080/inquiries/${inquiryId}`, {
+            const response = await axios.delete(`http://localhost:8080/inquiries/${inquiryId}`, {
                 headers: {
                     "Content-Type": "application/json",
                     Authorization: `Bearer ${token}`,
                 },
             });
+
+            console.log("Response:", response);
+            console.log("Inquiry deleted successfully:", inquiryId);
+
             setUserInquiries(prevInquiries => prevInquiries.filter(inquiry => inquiry.inquiryId !== inquiryId));
         } catch (error) {
             console.error('Error deleting inquiry:', error);
+
+            if (error.response) {
+                console.log('Response status:', error.response.status);
+                console.log('Response data:', error.response.data);
+            } else {
+                console.log('Error message:', error.message);
+            }
         }
     };
 
@@ -88,13 +99,16 @@ function Profile() {
         console.log("Token:", token);
 
         try {
-            await axios.delete(`http://localhost:8080/products/{productId}`, {
+            const response = await axios.delete(`http://localhost:8080/products/${productId}`, {
                 headers: {
                     "Content-Type": "application/json",
                     Authorization: `Bearer ${token}`,
                 },
             });
+
+            console.log("Response:", response);
             console.log("Product deleted successfully:", productId);
+
             const updatedProducts = userData.products.filter(product => product.productId !== productId);
 
             setUserData(prevUserData => ({
@@ -103,9 +117,13 @@ function Profile() {
             }));
         } catch (error) {
             console.error('Error deleting product:', error);
-            console.error('Error deleting product:', error);
-            console.log('Response status:', error.response.status);
-            console.log('Response data:', error.response.data);
+
+            if (error.response) {
+                console.log('Response status:', error.response.status);
+                console.log('Response data:', error.response.data);
+            } else {
+                console.log('Error message:', error.message);
+            }
         }
     };
 

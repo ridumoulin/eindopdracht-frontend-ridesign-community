@@ -11,6 +11,7 @@ import { ReactComponent as Heart } from '../../assets/nav/heart-icon.svg';
 import { ReactComponent as ShoppingCart } from '../../assets/nav/shopping-cart-icon.svg';
 import { ReactComponent as Profile } from '../../assets/nav/profile-icon.svg';
 import { ReactComponent as Search } from '../../assets/nav/search-icon.svg';
+import Button from "../../components/Button/Button.jsx";
 
 function Navigation() {
     const { register, handleSubmit } = useForm();
@@ -90,7 +91,7 @@ function Navigation() {
                             <div className="profile-dropdown" onMouseEnter={showProfileMenu} onMouseLeave={hideProfileMenu}>
                                 <ul>
                                     <li><Link to="/profile">Profiel</Link></li>
-                                    <li><button onClick={handleLogout}>Uitloggen</button></li>
+                                    <li><Button onClick={handleLogout} text="Uitloggen" /></li>
                                 </ul>
                             </div>
                         )}

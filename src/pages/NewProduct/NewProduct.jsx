@@ -1,6 +1,6 @@
 import './NewProduct.scss';
-import { useForm } from 'react-hook-form';
-import { ReactComponent as GreenDot } from '../../assets/general/green-dot-icon.svg';
+import {useForm} from 'react-hook-form';
+import {ReactComponent as GreenDot} from '../../assets/general/green-dot-icon.svg';
 import TextInput from "../../components/TextInput/TextInput.jsx";
 import Textarea from "../../components/TextArea/Textarea.jsx";
 import Checkbox from "../../components/Checkbox/Checkbox.jsx";
@@ -11,31 +11,26 @@ import {useNavigate} from "react-router-dom";
 import PhotosUpload from "../../components/PhotosUpload/PhotosUpload.jsx";
 import {prepareProductData} from "../../helpers/prepareProductData.jsx";
 import Button from "../../components/Button/Button.jsx";
-import { AuthContext } from "../../context/AuthContext";
+import {AuthContext} from "../../context/AuthContext";
 
 function NewProduct() {
 
-    const [values, setValue] = useState([{}, {}, {}]);
-
-    const { register, handleSubmit, formState: { errors } } = useForm()
-
+    const [values, setValue] = useState([null, null, null]); // Initialize with null for file objects
+    const { register, handleSubmit, formState: { errors } } = useForm();
     const navigate = useNavigate();
     const baseUrl = 'http://localhost:8080';
     const { user } = useContext(AuthContext);
 
-    async function newProduct(data) {
-        const token = localStorage.getItem("token");
-        data.images = values
+    const token = localStorage.getItem("token");
 
+    async function newProduct(data) {
+        data.images = [];
         const preparedData = prepareProductData(data);
         console.log("Data to be sent:", preparedData);
-
-        delete preparedData.photos
-
+        delete preparedData.photos;
         if (user && user.username) {
             preparedData.username = user.username;
         }
-
         try {
             const response = await axios.post(`${baseUrl}/products`, preparedData, {
                 headers: {
@@ -44,17 +39,41 @@ function NewProduct() {
                 },
             });
             console.log("Product created successfully:", response.data);
+            if (response.data){
+                sentImages(response.data.productId)
+            }
+
         } catch (error) {
             console.error("Error creating product:", error.response ? error.response.data : error.message);
-        } finally {
-            navigate('/profile');
+        }
+    }
+
+    async function sentImages(id) {
+        for (let i = 0; i < values.length; i++) {
+            const formData = new FormData()
+            console.log(values[i])
+            formData.append("file", values[i]);
+            try {
+                const response = await axios.post(`${baseUrl}/image/product/${id}`, formData, {
+                    headers: {
+                        "Content-Type": "multipart/form-data",
+                        Authorization: `Bearer ${token}`,
+                    },
+                });
+                console.log(response);
+            } catch (e) {
+                console.error(e);
+            }finally {
+                navigate('/profile')
+            }
         }
     }
 
     return (
         <div className="outer-container-new-product">
             <form className="form-new-product" onSubmit={handleSubmit(newProduct)}>
-                <h2><GreenDot className="green-dot-title"/> Voeg jouw RiDesign toe <GreenDot className="green-dot-title"/></h2>
+                <h2><GreenDot className="green-dot-title"/> Voeg jouw RiDesign toe <GreenDot
+                    className="green-dot-title"/></h2>
 
                 <TextInput
                     type="text"
@@ -77,12 +96,12 @@ function NewProduct() {
                     register={register}
                     placeholder="Selecteer een categorie"
                     options={[
-                        { value: 'sofas', label: 'Banken' },
-                        { value: 'beds', label: 'Bedden' },
-                        { value: 'cabinets', label: 'Kasten' },
-                        { value: 'chairs', label: 'Stoelen & fauteuils' },
-                        { value: 'tables', label: 'Tafels' },
-                        { value: 'garden-furniture', label: 'Tuinmeubelen' }
+                        {value: 'sofas', label: 'Banken'},
+                        {value: 'beds', label: 'Bedden'},
+                        {value: 'cabinets', label: 'Kasten'},
+                        {value: 'chairs', label: 'Stoelen & fauteuils'},
+                        {value: 'tables', label: 'Tafels'},
+                        {value: 'garden-furniture', label: 'Tuinmeubelen'}
                     ]}
                     errors={errors.categories}
                 />
@@ -139,7 +158,7 @@ function NewProduct() {
                     />
                 </div>
 
-                <Button text="RiDesign toevoegen" type="submit" />
+                <Button text="RiDesign toevoegen" type="submit"/>
 
             </form>
         </div>

@@ -1,6 +1,7 @@
 import PropTypes from 'prop-types';
 import './ProductCardSCFV.scss';
 import { Link } from 'react-router-dom';
+import Button from "../Button/Button.jsx";
 
 function ProductCardSCFV ({ productId, title, price, designer, images, handleDelete }) {
     return (
@@ -10,7 +11,7 @@ function ProductCardSCFV ({ productId, title, price, designer, images, handleDel
                     <Link to={`/product/${productId}`} className="product-title">{title}</Link>
                     <h4 className="product-price">€{price.toFixed(2)}</h4>
                     <p className="designer-product">{designer}</p>
-                    <button className="deleting-product" onClick={() => handleDelete(productId)}>Verwijder RiDesign</button>
+                    <Button className="deleting-product" onClick={() => handleDelete(productId)} text="Verwijder RiDesign"/>
                 </section>
 
                 <section className="product-card-photo-wrapper">

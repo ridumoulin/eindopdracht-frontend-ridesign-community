@@ -81,17 +81,17 @@ function ShoppingCart() {
             <div className="content-shopping-cart">
                 <div>
                     {currentProducts.length ? (
-                    currentProducts.map(product => (
-                        <ProductCardSCFV
-                            key={product.productId}
-                            productId={product.productId}
-                            title={product.productTitle}
-                            price={product.price}
-                            designer={product.username}
-                            images={"data:image/jpeg;base64," + product.images[0]}
-                            handleDelete={() => handleDelete(product.productId)}
-                        />
-                    ))
+                        currentProducts.map(product => (
+                            <ProductCardSCFV
+                                key={product.productId}
+                                productId={product.productId}
+                                title={product.productTitle}
+                                price={product.price}
+                                designer={product.username}
+                                images={"data:image/jpeg;base64," + product.images[0]}
+                                handleDelete={() => handleDelete(product.productId)}
+                            />
+                        ))
                     ) : (
                         <div>Geen producten in het winkelmandje</div>
                     )}

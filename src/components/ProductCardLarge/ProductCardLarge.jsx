@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import './ProductCardLarge.scss';
 import { ReactComponent as HG } from '../../assets/general/heart-green.svg';
 import { ReactComponent as Heart } from '../../assets/nav/heart-icon.svg';
+import Button from "../Button/Button.jsx";
 
 function ProductCardLarge({ images, title, price, measurements, materials, designer, description, isFavorite, onFavoriteToggle, onAddToCart }) {
     const [currentImageIndex, setCurrentImageIndex] = useState(0);
@@ -47,7 +48,7 @@ function ProductCardLarge({ images, title, price, measurements, materials, desig
                     <p className="product-materials">{materials}</p>
                     <p className="designer-product">Door {designer}</p>
                     <p className="product-description">{description}</p>
-                    <button className="button-shoppingcart" onClick={handleAddToCartClick}>Toevoegen winkelmand</button>
+                    <Button className="button-shoppingcart" onClick={handleAddToCartClick} text="Toevoegen winkelmand" />
                 </section>
             </div>
         </div>
@@ -68,4 +69,3 @@ ProductCardLarge.propTypes = {
 };
 
 export default ProductCardLarge;
-
