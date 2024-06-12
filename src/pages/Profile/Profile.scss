@@ -25,7 +25,7 @@
   padding-left: 1.6rem;
   flex-basis: 14.5rem;
 
-  h2 {
+  .first {
     margin: 1rem 0;
   }
 
@@ -33,6 +33,17 @@
     font-size: 1.3rem;
   }
 }
+
+.user-photo-form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.user-hello-username {
+  margin-top: 1rem;
+}
+
 
 .button-show-update-form {
   margin: 2rem 0;
@@ -50,6 +61,7 @@
   height: 13rem;
   width: 13rem;
   border-radius: 50%;
+  gap: 1rem;
 }
 
 .user-photo {
@@ -93,7 +105,6 @@
   max-width: calc(70rem - 14.5rem - 2rem);;
   display: flex;
   flex-direction: row;
-  justify-content: center;
   flex-wrap: wrap;
 }
 
@@ -112,16 +123,6 @@
   gap: 1rem;
 }
 
-.button-section-profile {
-  display: flex;
-  justify-content: center;
+.button-add-photo {
+  margin: 1rem 0;
 }
-
-.button-profile {
-  margin: 0 1rem;
-  height: 2rem;
-  padding: 0 0.5rem;
-}
-
-
-

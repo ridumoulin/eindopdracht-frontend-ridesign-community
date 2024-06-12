@@ -5,13 +5,13 @@ import TextInput from "../../components/TextInput/TextInput.jsx";
 import Textarea from "../../components/TextArea/Textarea.jsx";
 import Checkbox from "../../components/Checkbox/Checkbox.jsx";
 import SelectInput from "../../components/SelectInput/SelectInput.jsx";
-import {useState} from "react";
+import {useContext, useState} from "react";
 import axios from "axios";
 import {useNavigate} from "react-router-dom";
 import PhotosUpload from "../../components/PhotosUpload/PhotosUpload.jsx";
 import {prepareProductData} from "../../helpers/prepareProductData.jsx";
 import Button from "../../components/Button/Button.jsx";
-
+import { AuthContext } from "../../context/AuthContext";
 
 function NewProduct() {
 
@@ -21,6 +21,7 @@ function NewProduct() {
 
     const navigate = useNavigate();
     const baseUrl = 'http://localhost:8080';
+    const { user } = useContext(AuthContext);
 
     async function newProduct(data) {
         const token = localStorage.getItem("token");
@@ -28,6 +29,12 @@ function NewProduct() {
 
         const preparedData = prepareProductData(data);
         console.log("Data to be sent:", preparedData);
+
+        delete preparedData.photos
+
+        if (user && user.username) {
+            preparedData.username = user.username;
+        }
 
         try {
             const response = await axios.post(`${baseUrl}/products`, preparedData, {

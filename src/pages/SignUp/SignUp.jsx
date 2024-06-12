@@ -84,7 +84,7 @@ function SignUp() {
                     <Checkbox
                         id="riDesigner"
                         label="Ben jij een RiDesigner?"
-                        register={register("riDesigner")}
+                        register={register}
                         value="true"
                     />
                 </div>

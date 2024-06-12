@@ -84,14 +84,17 @@ function Profile() {
 
     const deleteProduct = async (productId) => {
         const token = localStorage.getItem("token");
+        console.log("Deleting product with ID:", productId);
+        console.log("Token:", token);
+
         try {
-            await axios.delete(`http://localhost:8080/product/${productId}`, {
+            await axios.delete(`http://localhost:8080/products/{productId}`, {
                 headers: {
                     "Content-Type": "application/json",
                     Authorization: `Bearer ${token}`,
                 },
             });
-
+            console.log("Product deleted successfully:", productId);
             const updatedProducts = userData.products.filter(product => product.productId !== productId);
 
             setUserData(prevUserData => ({
@@ -100,39 +103,35 @@ function Profile() {
             }));
         } catch (error) {
             console.error('Error deleting product:', error);
+            console.error('Error deleting product:', error);
+            console.log('Response status:', error.response.status);
+            console.log('Response data:', error.response.data);
         }
     };
 
-    useEffect(() => {
-        const handlePhotoUpload = async () => {
+    const handlePhotoUpload = async () => {
+        if (selectedFile) {
+            const formData = new FormData();
+            formData.append('file', selectedFile);
+            const token = localStorage.getItem("token");
 
-            console.log(selectedFile)
-
-            if (selectedFile) {
-                const formData = new FormData();
-                formData.append('imageData', selectedFile);
-                const token = localStorage.getItem("token");
-
-                try {
-                    const response = await axios.post(`http://localhost:8080/image/user/${user.email}`, formData, {
-                        headers: {
-                            "Content-Type": "multipart/form-data",
-                            Authorization: `Bearer ${token}`,
-                        },
-                    });
-                    console.log('Photo uploaded successfully:', response.data);
-                    setUserData(prevData => ({
-                        ...prevData,
-                        imageData: response.data.imageData
-                    }));
-                } catch (error) {
-                    console.error('Error uploading photo:', error);
-                }
+            try {
+                const response = await axios.post(`http://localhost:8080/image/user/${user.email}`, formData, {
+                    headers: {
+                        "Content-Type": "multipart/form-data",
+                        Authorization: `Bearer ${token}`,
+                    },
+                });
+                console.log('Photo uploaded successfully:', response.data);
+                setUserData(prevData => ({
+                    ...prevData,
+                    imageData: response.data.imageData
+                }));
+            } catch (error) {
+                console.error('Error uploading photo:', error);
             }
-        };
-
-        handlePhotoUpload();
-    }, [selectedFile, user.email, setUserData]);
+        }
+    };
 
     const handleFileChange = (file) => {
         setSelectedFile(file);
@@ -178,27 +177,34 @@ function Profile() {
         <div className="outer-container-profile">
             <div className="profile-page">
                 <section className="user-information">
-                    <div className="wrapper-profile-photo">
-                        {userData.imageData ? (
-                            <img src={"data:image/jpeg;base64, " + userData.imageData} alt={userData.username} className="user-photo" />
-                        ) : (
-                            <PhotoUpload
-                                value={selectedFile ? selectedFile : null}
-                                setValue={setSelectedFile}
-                                handleFileChange={handleFileChange}
-                                register={register}
-                                errors={errors.photo}
-                            />
-                        )}
+                    <div className="wrapper-profile">
+                            {userData.imageData ? (
+                                    <div className="wrapper-profile-photo">
+                                        <img src={"data:image/jpeg;base64, " + userData.imageData} alt={userData.username} className="user-photo" />
+                                    </div>
+                            ) : (
+                                <form className="user-photo-form" onSubmit={handleSubmit(handlePhotoUpload)}>
+                                    <PhotoUpload
+                                        value={selectedFile ? selectedFile : null}
+                                        setValue={setSelectedFile}
+                                        handleFileChange={handleFileChange}
+                                        register={register}
+                                        errors={errors.photo}
+                                    />
+                                    <Button className="button-add-photo" text="Opslaan" type="submit"/>
+                                </form>
+                            )}
+
                     </div>
-
-                    <h2 className="first-name">Hey you! {userData.firstname}</h2>
-                    <p>Gebruikersnaam: {userData.username}</p>
-
-                    <Button onClick={() => setShowUpdateUsernameForm(!showUpdateUsernameForm)} className="button-show-update-form" text="Gebruikersnaam aanpassen" />
+                    <div className="user-hello-username">
+                        <h2 className="first-name">Hey you! {userData.firstname}</h2>
+                        <p>Gebruikersnaam: {userData.username}</p>
 
 
-                    {showUpdateUsernameForm && (
+                        <Button onClick={() => setShowUpdateUsernameForm(!showUpdateUsernameForm)} className="button-show-update-form" text="Gebruikersnaam aanpassen" />
+
+
+                        {showUpdateUsernameForm && (
                         <form onSubmit={handleSubmit(handleUpdateUsername)} className="update-username-form">
                             <div style={{ width: '100%', maxWidth: '10rem' }}>
                                 <TextInput
@@ -210,9 +216,10 @@ function Profile() {
                                     errors={errors.newUsername}
                                 />
                             </div>
-                            <button type="submit" className="button-update-username">Opslaan</button>
+                            <Button className="button-update-username" text="Opslaan" type="submit"/>
                         </form>
-                    )}
+                        )}
+                    </div>
                 </section>
 
                 <section className="users-content">
