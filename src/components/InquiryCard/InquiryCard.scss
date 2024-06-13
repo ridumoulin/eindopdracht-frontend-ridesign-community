@@ -1,0 +1,32 @@
+@import '../../scss/variables/variables.scss';
+
+.inquiry-card-wrapper {
+  width: 24rem;
+  height: 13rem;
+  padding: 1rem;
+
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+  justify-content: space-between;
+
+  h4 {
+    font-size: 1rem;
+  }
+
+  p {
+    font-size: 0.75rem;
+    margin-top: 0.2rem;
+  }
+}
+
+.button-deleting-inquiry {
+  color: $dark-green-color;
+  font-size: 0.8rem;
+}
+
+.button-deleting-inquiry:hover {
+  cursor: pointer;
+  color: black;
+}
+

@@ -1,0 +1,44 @@
+@import '../../scss/variables/variables.scss';
+
+.ridesign-card-wrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  height: 18rem;
+  width: 17rem;
+  padding: 1rem;
+}
+
+.photo-designer-wrapper {
+  height: 13rem;
+  width: 13rem;
+  border-radius: 50%;
+}
+
+.ridesigner-card-photo {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 50%;
+}
+
+.designer-name {
+  height: 3rem;
+  color: black;
+  text-align: center;
+
+  p {
+    font-size: 1.4rem;
+  }
+}
+
+.placeholer-ridesigner {
+  border: 0.1rem solid $dark-green-color;
+  height: 13rem;
+  width: 13rem;
+  border-radius: 50%;
+
+  font-size: 0.8rem;
+  text-align: center;
+}

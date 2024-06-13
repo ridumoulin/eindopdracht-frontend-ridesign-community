@@ -1,42 +1,40 @@
 import './SignIn.scss';
-import {useContext} from "react";
+import {useContext, useState} from "react";
 import { AuthContext } from "../../context/AuthContext.jsx";
-import { Link, useNavigate } from 'react-router-dom';
+import {Link, useNavigate} from 'react-router-dom';
 import { ReactComponent as GreenDot } from '../../assets/general/green-dot-icon.svg';
 import { useForm } from 'react-hook-form';
 import PasswordInput from "../../components/PasswordInput/PasswordInput.jsx";
 import TextInput from "../../components/TextInput/TextInput.jsx";
 import axios from "axios";
+import Button from "../../components/Button/Button.jsx";
 
 function SignIn() {
-
-    const authContext = useContext(AuthContext);
-    const navigate = useNavigate();
-    const baseUrl = 'http://localhost:5432';
-
     const { register, handleSubmit, formState: { errors } } = useForm({
         mode: 'onChange',
         criteriaMode: 'all'
     });
 
-    const handleLogin = async (data) => {
-        const { email } = data;
-        await authContext.login(email);
-        await signIn(data);
-    };
+    const authContext = useContext(AuthContext);
+    const navigate = useNavigate();
+    const baseUrl = 'http://localhost:8080';
+    const [errorMessage, setErrorMessage] = useState("");
 
-    async function signIn(data) {
+    const handleLogin = async (data) => {
+        console.log(data)
         try {
             const response = await axios.post(`${baseUrl}/authenticate`, data);
-            const { accesstoken } = response.data;
-            console.log("User signed in successfully:", accesstoken);
-            await authContext.login(accesstoken);
+            console.log(response)
+            const { jwt } = response.data;
+            await authContext.login(jwt);
+            navigate('/profile');
         } catch (error) {
             console.error("Error met inloggen:", error.response.data);
+            setErrorMessage("Onjuiste e-mail of wachtwoord");
         } finally {
             navigate('/profile')
         }
-    }
+    };
 
     return (
         <div className="outer-container-sign-in">
@@ -61,7 +59,10 @@ function SignIn() {
                     placeholder="Vul hier je wachwoord in"
                     errors={errors.password}
                 />
-                <button type="submit">Inloggen</button>
+
+                {errorMessage && <span className="error-message">{errorMessage}</span>}
+
+                <Button text="Inloggen" type="submit" />
             </form>
         </div>
     );

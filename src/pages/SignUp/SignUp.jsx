@@ -6,6 +6,7 @@ import PasswordInput from "../../components/PasswordInput/PasswordInput.jsx";
 import Checkbox from "../../components/Checkbox/Checkbox.jsx";
 import axios from "axios";
 import { useNavigate } from 'react-router-dom';
+import Button from "../../components/Button/Button.jsx";
 
 function SignUp() {
     const { register, handleSubmit, formState: { errors } } = useForm({
@@ -14,23 +15,24 @@ function SignUp() {
     });
 
     const navigate = useNavigate();
-    const baseUrl = 'http://localhost:5432';
+    const baseUrl = 'http://localhost:8080';
 
     function handleFormSubmit(data) {
         signUp(data);
     }
 
     async function signUp(data) {
+        console.log(data)
         try {
-            const response = await axios.post(`${baseUrl}/register`, data);
+            const response = await axios.post(`${baseUrl}/users/register`, data);
+
             console.log("User registered successfully:", response.data);
         } catch (error) {
             console.error("Error registering user:", error.response.data);
         } finally {
-            navigate('/signin')
+            navigate('/sign-in')
         }
     }
-
 
     return (
         <div className="outer-container-sign-up">
@@ -80,14 +82,14 @@ function SignUp() {
 
                 <div className="checkbox-container-ri-designer">
                     <Checkbox
-                        id="isRiDesigner-checkbox"
+                        id="riDesigner"
                         label="Ben jij een RiDesigner?"
-                        register={register("delivery")}
-                        value="yes"
+                        register={register}
+                        value="true"
                     />
                 </div>
 
-                <button type="submit">Aanmelden</button>
+                <Button text="Aanmelden" type="submit" />
             </form>
         </div>
     );

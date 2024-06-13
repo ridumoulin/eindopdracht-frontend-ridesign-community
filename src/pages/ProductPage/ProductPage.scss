@@ -1,0 +1,20 @@
+@import '../../scss/variables/variables.scss';
+
+.outer-container-product-page {
+  background-color: white;
+  min-height: calc(100vh - 9rem);
+  width: 100vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.content-product-page {
+  border-radius: 0.3125rem;
+  width: 70rem;
+  height: 40rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+

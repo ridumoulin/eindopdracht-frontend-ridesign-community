@@ -1,56 +1,33 @@
 @import '../../scss/variables/variables.scss';
 
-.photo-upload-container {
+.single-photo-upload-container {
   margin-top: 1rem;
-  width: 23rem;
-  height: 11rem;
+  width: 13rem;
+  height: 13rem;
   color: black;
   display: flex;
   flex-direction: column;
+  border-radius: 50%;
 }
 
-.upload-content-container {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  height: 100%;
-  width: 100%;
-}
-
-.photo-placeholder,
-.wrapper-upload-photo {
-  flex-basis: 7rem;
+.single-photo-placeholder,
+.single-wrapper-upload-photo {
   width: 100%;
   height: 100%;
-  border-radius: 0.3125rem;
+  border-radius: 50%;
   box-shadow: 0 0.125rem 0.25rem rgba(142, 137, 135, 0.8);
   overflow: hidden;
 }
 
-.photo-placeholder {
+.user-uploaded-photo {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.single-photo-placeholder {
   background-color: $off-white-color;
   display: flex;
   justify-content: center;
   align-items: center;
-}
-
-.wrapper-upload-photo {
-  background: none;
-
-  img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    border-radius: 0.3125rem;
-  }
-}
-
-.uploaded-photo {
-  background-color: transparent;
-}
-
-.plus-icon {
-  flex-basis: 1.7rem;
-  width: 1.7rem;
-  margin-bottom: 0.8rem;
 }

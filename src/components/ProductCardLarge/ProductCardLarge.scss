@@ -1,1 +1,102 @@
 @import '../../scss/variables/variables.scss';
+
+.product-card-large-wrapper {
+  height: 37rem;
+  width: 55rem;
+  padding: 2rem;
+  border-radius: 0.3125rem;
+}
+
+.product-card-large {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+
+  height: calc(37rem - 4rem);
+}
+
+.product-card-photos-wrapper {
+  width: 27.5rem;
+  height: 100%;
+  position: relative;
+}
+
+.product-card-photo {
+  border-radius: 0.3125rem;
+}
+
+.image-navigation {
+  height: 100%;
+  width: 20%;
+  background-color: transparent;
+  position: absolute;
+  top: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+}
+
+.image-navigation::before {
+  content: "";
+}
+
+.image-navigation.left {
+  left: 0;
+}
+
+.image-navigation.right {
+  right: 0;
+}
+
+.product-card-large-info {
+  width: 27.5rem;
+  height: 100%;
+  padding: 1rem;
+  color: black;
+}
+
+.product-title-large {
+  font-size: 1.7rem;
+  margin-bottom: 0.7rem;
+}
+
+.product-price-large {
+  font-size: 1.2rem;
+  margin-bottom: 0.7rem;
+}
+
+.product-measurements {
+  font-size: 1rem;
+  margin-bottom: 0.7rem;
+  color: $grey-color;
+}
+
+.product-materials {
+  font-size: 1rem;
+  margin-bottom: 0.7rem;
+  color: $grey-color;
+}
+
+.designer-product {
+  font-size: 1rem;
+  font-weight: bold;
+  margin-bottom: 0.7rem;
+}
+
+.product-description {
+  font-size: 1rem;
+  margin-bottom: 0.7rem;
+  color: $grey-color;
+}
+
+.product-title-and-heart {
+  display: flex;
+  flex-direction: row;
+  gap: 1.2rem;
+}
+
+.general-button.button-shoppingcart {
+  width: 23.5rem;
+}

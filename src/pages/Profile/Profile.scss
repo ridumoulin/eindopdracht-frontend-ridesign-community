@@ -9,22 +9,120 @@
 }
 
 .profile-page {
-  background-color: $light-green-color;
+  //background-color: $light-green-color;
   border-radius: 0.3125rem;
-  width: 60rem;
-  height: 40rem;
+  width: 70rem;
+  min-height: 40rem;
   margin: 3.5rem 0;
   padding: 2rem;
   display: flex;
+  flex-direction: row;
+  gap: 2rem;
+  color: black;
+}
+
+.user-information {
+  padding-left: 1.6rem;
+  flex-basis: 14.5rem;
+
+  .first {
+    margin: 1rem 0;
+  }
+
+  p {
+    font-size: 1.3rem;
+  }
+}
+
+.user-photo-form {
+  display: flex;
   flex-direction: column;
   justify-content: center;
-  align-items: center;
 }
 
-.section-user-information {
-
+.user-hello-username {
+  margin-top: 1rem;
 }
 
-.section-user-ridesigns {
 
+.button-show-update-form {
+  margin: 2rem 0;
+  padding: 0.5rem;
+  font-size: 0.7rem;
+}
+
+.button-update-username {
+  margin: 1rem 0;
+  padding: 0.5rem;
+  font-size: 0.7rem;
+}
+
+.wrapper-profile-photo {
+  height: 13rem;
+  width: 13rem;
+  border-radius: 50%;
+  gap: 1rem;
+}
+
+.user-photo {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 50%;
+}
+
+.input-photo-designer {
+  height: 13rem;
+  width: 13rem;
+  border-radius: 50%;
+
+  font-size: 0.8rem;
+  text-align: center;
+}
+
+.users-content {
+  flex-basis: calc(70rem - 14.5rem - 2rem);
+  gap: 1rem;
+
+  display: flex;
+  flex-direction: column;
+
+  h3 {
+    font-size: 1.3rem;
+    text-transform: uppercase;
+  }
+}
+
+.user-products {
+  min-height: calc(20rem - 2rem);
+  max-width: calc(70rem - 14.5rem - 2rem);
+
+  display: flex;
+  flex-direction: column;
+}
+
+.profile-products {
+  max-width: calc(70rem - 14.5rem - 2rem);;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+
+.users-inquiries {
+  min-height: calc(20rem - 2rem);
+
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+}
+
+.users-inquiries-cards {
+  flex-wrap: wrap;
+  display: flex;
+  flex-direction: row;
+  gap: 1rem;
+}
+
+.button-add-photo {
+  margin: 1rem 0;
 }

@@ -26,7 +26,7 @@ function SelectInput(props) {
 SelectInput.propTypes = {
     id: PropTypes.string.isRequired,
     label: PropTypes.string.isRequired,
-    register: PropTypes.object.isRequired,
+    register: PropTypes.func.isRequired,
     placeholder: PropTypes.string,
     options: PropTypes.arrayOf(
         PropTypes.shape({

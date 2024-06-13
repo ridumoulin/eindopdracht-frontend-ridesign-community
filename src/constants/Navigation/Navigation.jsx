@@ -4,12 +4,14 @@ import { useForm } from 'react-hook-form';
 import { NavLink, Link, useNavigate} from 'react-router-dom';
 import { useState } from "react";
 import {AuthContext} from "../../context/AuthContext";
+import axios from 'axios';
 
 import { ReactComponent as Logo } from '../../assets/nav/logo.svg';
 import { ReactComponent as Heart } from '../../assets/nav/heart-icon.svg';
 import { ReactComponent as ShoppingCart } from '../../assets/nav/shopping-cart-icon.svg';
 import { ReactComponent as Profile } from '../../assets/nav/profile-icon.svg';
 import { ReactComponent as Search } from '../../assets/nav/search-icon.svg';
+import Button from "../../components/Button/Button.jsx";
 
 function Navigation() {
     const { register, handleSubmit } = useForm();
@@ -18,8 +20,15 @@ function Navigation() {
     const navigate = useNavigate();
     const { isAuth, logout } = useContext(AuthContext);
 
-    const onSubmit = (data) => {
-        console.log('Search term:', data.search);
+    const onSubmit = async (data) => {
+        try {
+            console.log(data)
+            const response = await axios.get(`http://localhost:8080/products/search?category=${data.search}`);
+            console.log(response)
+            navigate(`/products`, { state: { searchResults: response.data } });
+        } catch (error) {
+            console.error('Error searching for products:', error);
+        }
     };
 
     const handleChange = (event) => {
@@ -82,7 +91,7 @@ function Navigation() {
                             <div className="profile-dropdown" onMouseEnter={showProfileMenu} onMouseLeave={hideProfileMenu}>
                                 <ul>
                                     <li><Link to="/profile">Profiel</Link></li>
-                                    <li><button onClick={handleLogout}>Uitloggen</button></li>
+                                    <li><Button onClick={handleLogout} text="Uitloggen" /></li>
                                 </ul>
                             </div>
                         )}
@@ -115,12 +124,12 @@ function Navigation() {
                                 {showProductDropdown && (
                                     <div className="product-dropdown" onMouseEnter={showProductMenu} onMouseLeave={hideProductMenu}>
                                         <ul>
-                                            <li><Link to="/sofas">Banken</Link></li>
-                                            <li><Link to="/beds">Bedden</Link></li>
-                                            <li><Link to="/closet">Kasten</Link></li>
-                                            <li><Link to="/chairs-fauteuils">Stoelen & fauteuils</Link></li>
-                                            <li><Link to="/tables">Tafels</Link></li>
-                                            <li><Link to="/garden-furniture">Tuinmeubelen</Link></li>
+                                            <li><Link to="/products?category=Banken">Banken</Link></li>
+                                            <li><Link to="/products?category=Bedden">Bedden</Link></li>
+                                            <li><Link to="/products?category=Kasten">Kasten</Link></li>
+                                            <li><Link to="/products?category=Stoelen-Fauteuils">Stoelen & fauteuils</Link></li>
+                                            <li><Link to="/products?category=Tafels">Tafels</Link></li>
+                                            <li><Link to="/products?category=Tuinmeubelen">Tuinmeubelen</Link></li>
                                         </ul>
                                     </div>
                                 )}

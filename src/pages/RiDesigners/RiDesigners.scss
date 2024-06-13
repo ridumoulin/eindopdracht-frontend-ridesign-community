@@ -6,17 +6,34 @@
   width: 100vw;
   display: flex;
   justify-content: center;
+  align-items: center;
 }
 
-.content-ri-designers {
-  background-color: $light-green-color;
+.content-ridesigners {
+  //background-color: $light-green-color;
   border-radius: 0.3125rem;
-  width: 150rem;
-  height: 80rem;
-  margin: 3.5rem 0;
+  width: 60rem;
+  height: auto;
+  margin: 5rem 0;
   padding: 2rem;
   display: flex;
-  flex-direction: row;
-  //justify-content: center;
-  //align-items: center;
+  flex-direction: column;
 }
+
+.ridesigners {
+  height: 40rem;
+  gap: 1rem;
+
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  margin-bottom: 1rem;
+}
+
+.buttons-ridesigners {
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+}
+

@@ -1,6 +1,7 @@
 import './Home.scss';
 import background from '../../assets/home/photo-background.jpg';
 import { Link } from 'react-router-dom';
+import Button from "../../components/Button/Button.jsx";
 
 function Home() {
     return (
@@ -15,21 +16,21 @@ function Home() {
                 <section className="section-background">
                     <p className="text-products">Op zoek naar duurzaam design?</p>
                     <Link to="/products">
-                        <button className="button-home-one">Producten</button>
+                        <Button text="Producten" type="submit" className="button-home-one"/>
                     </Link>
                 </section>
 
                 <section className="section-background">
                     <p className="text-ridesign">Ben jij een RiDesigner?</p>
                     <Link to="/new-product">
-                        <button className="button-home-two">Verkopen</button>
+                        <Button text="Verkopen" type="submit" className="button-home-two"/>
                     </Link>
                 </section>
 
                 <section className="section-background">
                     <p className="text-contact">Aanvraag of inleveren?</p>
                     <Link to="/inquiries">
-                        <button className="button-home-three">Contact</button>
+                        <Button text="Contact" type="submit" className="button-home-three"/>
                     </Link>
                 </section>
             </div>

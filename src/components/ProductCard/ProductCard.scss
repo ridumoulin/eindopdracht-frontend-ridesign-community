@@ -1,0 +1,79 @@
+@import '../../scss/variables/variables.scss';
+
+.product-card-wrapper {
+  width: 24rem;
+  height: 13rem;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.product-card {
+  background-color: $light-green-color;
+  border-radius: 0.3125rem;
+
+  width: calc(24rem - 2rem);
+  height: calc(13rem - 2rem);
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.product-card-info {
+  flex-basis: 11rem;
+  height: 100%;
+  text-align: right;
+  padding: 1rem 0;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-end;
+}
+
+.product-title {
+  font-size: 0.8rem;
+  width: 10rem;
+  color: black;
+  transition: color 0.3s ease;
+}
+
+.product-title:hover {
+  color: white;
+}
+
+.product-price {
+  color: black;
+  margin-top: 1rem;
+}
+
+.designer-product {
+  color: black;
+  margin-top: 0.7rem;
+  font-size: 1rem;
+}
+
+.product-card-photo-wrapper {
+  flex-basis: 10rem;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.product-card-photo {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.button-deleting-product {
+  color: $off-white-color;
+  font-size: 0.8rem;
+}
+
+.button-deleting-product:hover {
+  cursor: pointer;
+  color: black;
+}
