@@ -93,17 +93,21 @@ function ProductPage() {
         const token = localStorage.getItem("token");
         console.log(token);
         try {
-            const response = await axios.post(`http://localhost:8080/shopping-cart/user/${getUserEmail()}/products/${productId}/add-to-cart`, {
-                headers: {
-                    "Content-Type": "application/json",
-                    Authorization: `Bearer ${token}`,
-                },
-            });
+            const response = await axios.post(
+                `http://localhost:8080/shopping-cart/user/${getUserEmail()}/products/${productId}/add-to-cart`,
+                {},
+                {
+                    headers: {
+                        "Content-Type": "application/json",
+                        Authorization: `Bearer ${token}`,
+                    },
+                }
+            );
             console.log(response)
-            if (response.status === 200) {
+            if (response.status === 201) {
                 console.log('Product added to cart successfully');
             } else {
-                console.error('Failed to add product to cart');
+                console.error('Failed to add product to cart', response.data);
             }
         } catch (error) {
             console.error('Error adding product to cart:', error);
