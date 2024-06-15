@@ -15,7 +15,7 @@ import {AuthContext} from "../../context/AuthContext";
 
 function NewProduct() {
 
-    const [values, setValue] = useState([null, null, null]); // Initialize with null for file objects
+    const [values, setValue] = useState([null, null, null]);
     const { register, handleSubmit, formState: { errors } } = useForm();
     const navigate = useNavigate();
     const baseUrl = 'http://localhost:8080';
